@@ -17,6 +17,62 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    
+    //1.
+    UIViewController *VC1 = [[UIViewController alloc] init];
+    VC1.view.backgroundColor = [UIColor whiteColor];
+    UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:VC1];
+    UIViewController *VC2 = [[UIViewController alloc] init];
+    UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:VC2];
+    UIViewController *VC3 = [[UIViewController alloc] init];
+    UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:VC3];
+    UIViewController *VC4 = [[UIViewController alloc] init];
+    UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:VC4];
+    UIViewController *VC5 = [[UIViewController alloc] init];
+    UINavigationController *nav5 = [[UINavigationController alloc] initWithRootViewController:VC5];
+    
+    
+    //2.
+    NSArray *viewCtrs = @[nav1,nav2,nav3,nav4,nav5];
+    //3.
+    UITabBarController *tabbarCtr = [[UITabBarController alloc] init];
+    //4.
+    [tabbarCtr setViewControllers:viewCtrs];
+    tabbarCtr.delegate = self;
+    //5.
+    self.window.rootViewController = tabbarCtr;
+    
+    
+    UITabBar *tabbar = tabbarCtr.tabBar;
+    UITabBarItem *item1 = [tabbar.items objectAtIndex:0];
+    UITabBarItem *item2 = [tabbar.items objectAtIndex:1];
+    UITabBarItem *item3 = [tabbar.items objectAtIndex:2];
+    UITabBarItem *item4 = [tabbar.items objectAtIndex:3];
+    UITabBarItem *item5 = [tabbar.items objectAtIndex:4];
+    item1.title = @"首页";
+    item2.title = @"发现";
+//    item3.title = @"首页";
+    item4.title = @"消息";
+    item5.title = @"我";
+    
+    item1.selectedImage = [[UIImage imageNamed:@"home_press_img"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item1.image = [[UIImage imageNamed:@"home_normal_img"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item2.selectedImage = [[UIImage imageNamed:@"discovery_press_img"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item2.image = [[UIImage imageNamed:@"discovery_normal_img"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item3.selectedImage = [[UIImage imageNamed:@"add_img_pressed"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item3.image = [[UIImage imageNamed:@"add_img_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item3.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);//注意这里的两个值
+    
+    item4.selectedImage = [[UIImage imageNamed:@"message_press_img"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item4.image = [[UIImage imageNamed:@"message_normal_img"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item5.selectedImage = [[UIImage imageNamed:@"my_press_img"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item5.image = [[UIImage imageNamed:@"my_normal_img"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    //改变UITabBarItem字体颜色
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:RGB(56, 184, 80),UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
