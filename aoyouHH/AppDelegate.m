@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "HomeViewController.h"
+#import "DiscoverViewController.h"
+#import "MsgViewController.h"
+#import "MeViewController.h"
 
 @interface AppDelegate ()
 
@@ -15,31 +19,48 @@
 @implementation AppDelegate
 
 
+- (void)setNav
+{
+    UINavigationBar *bar = [UINavigationBar appearance];
+    //设置显示的颜色
+//    bar.barTintColor = RGB(56, 184, 80);
+    bar.barTintColor = navigationBarColor;
+    //设置字体颜色
+    bar.tintColor = [UIColor whiteColor];
+    //都行
+    //    [bar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [bar setTitleTextAttributes:@{UITextAttributeTextColor : [UIColor whiteColor]}];
+}
+
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
     
     //1.
-    UIViewController *VC1 = [[UIViewController alloc] init];
-    VC1.view.backgroundColor = [UIColor whiteColor];
+    HomeViewController *VC1 = [[HomeViewController alloc] init];
     UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:VC1];
-    UIViewController *VC2 = [[UIViewController alloc] init];
+    DiscoverViewController *VC2 = [[DiscoverViewController alloc] init];
     UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:VC2];
     UIViewController *VC3 = [[UIViewController alloc] init];
     UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:VC3];
-    UIViewController *VC4 = [[UIViewController alloc] init];
+    VC3.view.backgroundColor = [UIColor whiteColor];
+    MsgViewController *VC4 = [[MsgViewController alloc] init];
     UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:VC4];
-    UIViewController *VC5 = [[UIViewController alloc] init];
+    MeViewController *VC5 = [[MeViewController alloc] init];
     UINavigationController *nav5 = [[UINavigationController alloc] initWithRootViewController:VC5];
     
-    
+    VC2.title = @"发现";
+    VC4.title = @"消息";
+    VC5.title = @"我";
     //2.
     NSArray *viewCtrs = @[nav1,nav2,nav3,nav4,nav5];
     //3.
     UITabBarController *tabbarCtr = [[UITabBarController alloc] init];
     //4.
     [tabbarCtr setViewControllers:viewCtrs];
-    tabbarCtr.delegate = self;
+//    tabbarCtr.delegate = self;
     //5.
     self.window.rootViewController = tabbarCtr;
     
@@ -70,6 +91,9 @@
     item5.image = [[UIImage imageNamed:@"my_normal_img"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     //改变UITabBarItem字体颜色
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:RGB(56, 184, 80),UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+    
+    
+    [self setNav];
     
     [self.window makeKeyAndVisible];
     
