@@ -23,6 +23,7 @@
 		E389BD2F1AE5E76500EA35B7 /* message_press_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E389BD251AE5E76500EA35B7 /* message_press_img@2x.png */; };
 		E389BD301AE5E76500EA35B7 /* my_normal_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E389BD261AE5E76500EA35B7 /* my_normal_img@2x.png */; };
 		E389BD311AE5E76500EA35B7 /* my_press_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E389BD271AE5E76500EA35B7 /* my_press_img@2x.png */; };
+		E3C3D2E61AE93C440055A0DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D2E41AE93C440055A0DD /* Main.storyboard */; };
 		E3D7818E1AE600E100EDC81F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7818D1AE600E100EDC81F /* HomeViewController.m */; };
 		E3D781911AE6018200EDC81F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781901AE6018200EDC81F /* DiscoverViewController.m */; };
 		E3D781941AE601F000EDC81F /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781931AE601F000EDC81F /* MsgViewController.m */; };
@@ -83,6 +84,7 @@
 		E389BD271AE5E76500EA35B7 /* my_press_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_press_img@2x.png"; sourceTree = "<group>"; };
 		E389BD321AE5EEA800EA35B7 /* Public.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Public.h; sourceTree = "<group>"; };
 		E389BD331AE5EEDE00EA35B7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		E3C3D2E51AE93C440055A0DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E3D7818C1AE600E100EDC81F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		E3D7818D1AE600E100EDC81F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		E3D7818F1AE6018200EDC81F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		E389BCEB1AE4DA1B00EA35B7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E3C3D2E41AE93C440055A0DD /* Main.storyboard */,
 				E3D781B81AE641D700EDC81F /* ViewController.h */,
 				E3D781B91AE641D700EDC81F /* ViewController.m */,
 				E389BCEF1AE4DA1B00EA35B7 /* AppDelegate.h */,
@@ -571,6 +574,7 @@
 				E389BD2B1AE5E76500EA35B7 /* discovery_press_img@2x.png in Resources */,
 				E389BCF91AE4DA1B00EA35B7 /* Images.xcassets in Resources */,
 				E389BD2F1AE5E76500EA35B7 /* message_press_img@2x.png in Resources */,
+				E3C3D2E61AE93C440055A0DD /* Main.storyboard in Resources */,
 				E389BD301AE5E76500EA35B7 /* my_normal_img@2x.png in Resources */,
 				E389BD2A1AE5E76500EA35B7 /* discovery_normal_img@2x.png in Resources */,
 			);
@@ -673,6 +677,14 @@
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
+		E3C3D2E41AE93C440055A0DD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E3C3D2E51AE93C440055A0DD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -693,7 +705,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Qin Hu (NYA36Q4225)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Qin Hu (NYA36Q4225)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -710,7 +723,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -734,7 +747,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Qin Hu (NYA36Q4225)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Qin Hu (NYA36Q4225)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -745,7 +759,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

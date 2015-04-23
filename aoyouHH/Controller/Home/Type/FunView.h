@@ -10,4 +10,6 @@
 
 @interface FunView : UIView
 
+@property(nonatomic, strong) UITableView *tableView;
+
 @end

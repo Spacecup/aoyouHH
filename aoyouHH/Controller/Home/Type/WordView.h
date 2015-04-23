@@ -10,4 +10,6 @@
 
 @interface WordView : UIView
 
+@property(nonatomic, strong) UITableView *tableView;
+
 @end

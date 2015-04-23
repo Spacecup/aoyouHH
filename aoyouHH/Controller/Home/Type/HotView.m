@@ -17,7 +17,6 @@
     NSMutableArray *_dataSources;
     NSInteger _currentPage;
     
-    
     NSInteger _marginTop;
 }
 
@@ -35,6 +34,11 @@ NSString *const HotestCellIndentifier = @"JokeCell";
         [self addMyTableView];
     }
     return self;
+}
+
+-(void)layoutSubviews{
+//    [self layoutSubviews];
+    NSLog(@"Hotest  layoutSubviews");
 }
 
 -(void)initData{

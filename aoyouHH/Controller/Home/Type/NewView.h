@@ -10,4 +10,6 @@
 
 @interface NewView : UIView
 
+@property(nonatomic, strong) UITableView *tableView;
+
 @end
