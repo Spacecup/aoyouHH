@@ -54,29 +54,10 @@
     
     //加入
     [self.view addSubview:self.scroll];
-    [self getHotestData];
 }
 
 
--(void)getHotestData{
-    NSString *r = @"joke_list";
-    NSString *drive_info = @"61f8612436df7ac7f0142a2de879846475f80000";
-    NSString *page = @"1";
-    NSString *offset = @"2";
-    NSString *type = @"web_good";
-    NSDictionary *dic = @{
-                          @"r":r,
-                          @"drive_info":drive_info,
-                          @"page":page,
-                          @"offset":offset,
-                          @"type":type
-                          };
-    [[NetworkSingleton sharedManager] getHotestResule:dic successBlock:^(id responseBody){
-        NSLog(@"成功");
-    } failureBlock:^(NSString *error){
-        NSLog(error);
-    }];
-}
+
 
 
 /*

@@ -10,4 +10,6 @@
 
 @interface HotView : UIView
 
+@property(nonatomic, strong) UITableView *tableView;
+
 @end

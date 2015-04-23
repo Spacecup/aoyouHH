@@ -8,6 +8,7 @@
 
 #import "NetworkSingleton.h"
 #import "JokeModel.h"
+#import "TuijianAttModel.h"
 
 
 @interface NetworkSingleton ()
@@ -43,6 +44,24 @@
     return manager;
 }
 
+#pragma mark 推荐关注
+-(void)getTuijianAttResult:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBolck{
+    AFHTTPRequestOperationManager *manager = [self baseHtppRequest];
+    NSString *url = [NSString stringWithFormat:@"%@",URL_ROOT];
+    //转码
+    NSString *urlStr = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    //请求
+    [manager POST:urlStr parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        NSArray *tuijianAtt = [[NSArray alloc] init];
+        tuijianAtt = [self getTuijianAttFromDicArray:responseObject];
+        
+        successBlock(tuijianAtt);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        failureBolck(error);
+    }];
+}
 
 #pragma mark 最火接口
 -(void)getHotestResule:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock{
@@ -55,7 +74,7 @@
         NSDictionary *resultDic = [responseObject objectForKey:@"joke"];
         
         //JokeModel
-        NSArray *jokeArr = nil;
+        NSArray *jokeArr = [[NSArray alloc] init];
         jokeArr = [self getJokeFromDicArray:[responseObject objectForKey:@"joke"]];
         
         successBlock(jokeArr);
@@ -66,7 +85,34 @@
 }
 
 
+//==================================关注=======================================
+//推荐关注数组
+-(NSArray *)getTuijianAttFromDicArray:(NSArray *)array{
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    if (array) {
+        for (NSDictionary *dic in array) {
+            [result addObject:[self getTuijianAttModel:dic]];
+        }
+    }
+    return result;
+}
 
+
+//获取推荐关注
+-(id)getTuijianAttModel:(NSDictionary *)dic{
+    TuijianAttModel *tuijianAtt = [[TuijianAttModel alloc] init];
+    tuijianAtt.id = [self getDicValue:dic andKey:@"id"];
+    tuijianAtt.content = [self getDicValue:dic andKey:@"content"];
+    tuijianAtt.number = [self getDicValue:dic andKey:@"number"];
+    tuijianAtt.follower = [self getDicValue:dic andKey:@"follower"];
+    tuijianAtt.hot = [self getDicValue:dic andKey:@"hot"];
+    tuijianAtt.recommend = [self getDicValue:dic andKey:@"recommend"];
+    tuijianAtt.att = [self getDicValue:dic andKey:@"att"];
+    
+    return tuijianAtt;
+}
+
+//=============================最火，趣图，最新，文字===========================
 //joke数组
 -(NSArray *)getJokeFromDicArray:(NSArray *)array{
     NSMutableArray *result = [[NSMutableArray alloc] init];
@@ -95,7 +141,7 @@
     joke.topic = [self getDicValue:dic andKey:@"topic"];
     joke.topic_content = [self getDicValue:dic andKey:@"topic_content"];
     
-    joke.pic = [self getPicModel:[dic objectForKey:@"pic"]];
+    joke.pic = [self getPicModel:[self getDicValue:dic andKey:@"pic"]];
     
     joke.user_name = [self getDicValue:dic andKey:@"user_name"];
     joke.user_pic = [self getDicValue:dic andKey:@"user_pic"];

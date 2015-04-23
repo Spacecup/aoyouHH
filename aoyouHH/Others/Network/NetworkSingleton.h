@@ -26,6 +26,9 @@ typedef void(^FailureBolck)(NSString *error);
 +(NetworkSingleton *)sharedManager;
 +(AFHTTPRequestOperationManager *)baseHtppRequest;
 
+#pragma mark 推荐关注
+-(void)getTuijianAttResult:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBolck;
+
 #pragma mark 最火接口
 -(void)getHotestResule:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock;
 
