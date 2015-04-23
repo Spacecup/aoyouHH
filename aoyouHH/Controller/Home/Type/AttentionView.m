@@ -83,7 +83,6 @@ NSString *const AttentionCellIndentifier2 = @"myAttentionCell";
         
         NSLog(@"推荐关注成功");
         NSMutableArray *arr = [[NSMutableArray alloc] initWithArray:responseBody];
-        NSLog(@"%@",responseBody);
         _tuiJianArr = responseBody;
         [self.tableView reloadData];
         
@@ -132,7 +131,7 @@ NSString *const AttentionCellIndentifier2 = @"myAttentionCell";
 }
 #pragma mark 刷新tableview
 -(void)reloadTable{
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
     [self.tableView.header endRefreshing];
     [self.tableView.footer endRefreshing];
 }

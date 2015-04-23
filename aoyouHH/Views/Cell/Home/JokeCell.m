@@ -8,6 +8,7 @@
 
 #import "JokeCell.h"
 #import "UIImageView+WebCache.h"
+#import "NetworkSingleton.h"
 
 @interface JokeCell ()
 {
@@ -74,6 +75,9 @@
     self.contentLabel.font = [UIFont systemFontOfSize:15];
     self.contentLabel.lineBreakMode = UILineBreakModeTailTruncation;
     [self.backView addSubview:self.contentLabel];
+    //图片
+    self.picImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, 0, 0)];
+    [self.backView addSubview:self.picImg];
     
 }
 
@@ -93,10 +97,32 @@
     self.timeLabel.text = joke.time;
     [self.userImg sd_setImageWithURL:[NSURL URLWithString:self.joke.user_pic] placeholderImage:[UIImage imageNamed:@"content_avatar_img"]];
     self.contentLabel.text = self.joke.content;
+    if (self.joke.pic!=nil) {
+        //
+        NSString *urlStr = [NSString stringWithFormat:@"%@%@small/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
+        NSURL *url = [NSURL URLWithString:urlStr];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+//        NSLog(@"width:%f,height:%f",image.size.width,image.size.height);
+    }
+
 }
 
 -(void)resizeHeight{
-    
+//    self.joke.content
+    CGSize contentSize = [self.joke.content sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(screen_width-8*2, 100) lineBreakMode:UILineBreakModeTailTruncation];
+//    NSLog(@"contentSize.height:%f",contentSize.height);
+    self.contentLabel.frame = CGRectMake(8, CGRectGetMaxY(self.userImg.frame)+_marginTop, screen_width-8*2, contentSize.height);
+    if (self.joke.pic!=nil) {
+        NSString *urlStr = [NSString stringWithFormat:@"%@%@small/%@", URL_IMAGE, self.joke.pic.path, self.joke.pic.name];
+        NSURL *url = [NSURL URLWithString:urlStr];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+//        NSLog(@"width:%f,height:%f",image.size.width,image.size.height);
+        self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, image.size.width, image.size.height);
+        [self.picImg sd_setImageWithURL:url placeholderImage:nil];
+    }else{
+        self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, 0, 0);
+    }
+    self.backView.frame = CGRectMake(0, _marginTop, screen_width, CGRectGetMaxY(self.picImg.frame)+_marginTop);
 }
 
 @end

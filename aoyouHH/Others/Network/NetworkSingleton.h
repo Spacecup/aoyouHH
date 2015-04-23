@@ -14,6 +14,7 @@ typedef void(^FailureBolck)(NSString *error);
 
 //接口域名
 #define URL_ROOT @"http://www.haha.mx/mobile_app_data_api.php"
+#define URL_IMAGE @"http://image.haha.mx/"
 //请求超时
 #define TIMEOUT 30
 

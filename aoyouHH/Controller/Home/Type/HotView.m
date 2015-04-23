@@ -16,6 +16,9 @@
 {
     NSMutableArray *_dataSources;
     NSInteger _currentPage;
+    
+    
+    NSInteger _marginTop;
 }
 
 @end
@@ -37,6 +40,7 @@ NSString *const HotestCellIndentifier = @"JokeCell";
 -(void)initData{
     _dataSources = [[NSMutableArray alloc] init];
     _currentPage = 1;
+    _marginTop = 5;
 }
 
 -(void)addMyTableView{
@@ -109,13 +113,13 @@ NSString *const HotestCellIndentifier = @"JokeCell";
 -(void)footerRefreshing{
     _currentPage++;
     [self getHotestData:_currentPage];
-    [self.tableView.footer noticeNoMoreData];
+//    [self.tableView.footer noticeNoMoreData];
     //    [self.tableView.footer endRefreshing];
     //    [self.tableView.footer resetNoMoreData];
 }
 #pragma mark 刷新tableview
 -(void)reloadTable{
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
     [self.tableView.header endRefreshing];
     [self.tableView.footer endRefreshing];
 }
@@ -134,14 +138,38 @@ NSString *const HotestCellIndentifier = @"JokeCell";
         //
         JokeModel *joke = _dataSources[indexPath.row];
         [cell setJokeData:joke];
+        [cell resizeHeight];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 //行高
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 160;
+    CGFloat height = 0;
+    height=_marginTop + height + _marginTop + 30 + _marginTop;
+    if (_dataSources.count>0) {
+        JokeModel *joke = _dataSources[indexPath.row];
+        CGSize contentSize = [joke.content sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(screen_width-8*2, 100) lineBreakMode:UILineBreakModeTailTruncation];
+        height =height + contentSize.height;
+        
+        if (joke.pic!=nil) {
+            //
+            NSString *urlStr = [NSString stringWithFormat:@"%@%@small/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
+            NSURL *url = [NSURL URLWithString:urlStr];
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+            height = height + _marginTop + image.size.height;
+        }else{
+            height = height +_marginTop;
+        }
+        
+//        NSLog(@"222222height:%f",height);
+        return height + _marginTop;
+    }else{
+        return 160;
+    }
+    
 }
 
 

@@ -150,6 +150,9 @@
 }
 //获取pic
 -(id)getPicModel:(NSDictionary *)dic{
+    if (dic == nil) {
+        return nil;
+    }
     PicModel *pic = [[PicModel alloc] init];
     pic.path = [self getDicValue:dic andKey:@"path"];
     pic.name = [self getDicValue:dic andKey:@"name"];
