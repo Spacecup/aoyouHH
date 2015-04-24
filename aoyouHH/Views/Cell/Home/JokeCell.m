@@ -113,7 +113,7 @@
 //    NSLog(@"contentSize.height:%f",contentSize.height);
     self.contentLabel.frame = CGRectMake(8, CGRectGetMaxY(self.userImg.frame)+_marginTop, screen_width-8*2, contentSize.height);
     if (self.joke.pic!=nil) {
-        NSString *urlStr = [NSString stringWithFormat:@"%@%@small/%@", URL_IMAGE, self.joke.pic.path, self.joke.pic.name];
+        NSString *urlStr = [NSString stringWithFormat:@"%@%@normal/%@", URL_IMAGE, self.joke.pic.path, self.joke.pic.name];
         NSURL *url = [NSURL URLWithString:urlStr];
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
 //        NSLog(@"width:%f,height:%f",image.size.width,image.size.height);

@@ -24,6 +24,13 @@
 		E389BD301AE5E76500EA35B7 /* my_normal_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E389BD261AE5E76500EA35B7 /* my_normal_img@2x.png */; };
 		E389BD311AE5E76500EA35B7 /* my_press_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E389BD271AE5E76500EA35B7 /* my_press_img@2x.png */; };
 		E3C3D2E61AE93C440055A0DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D2E41AE93C440055A0DD /* Main.storyboard */; };
+		E3C3D2EC1AE9E0950055A0DD /* activity_area_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D2E81AE9E0950055A0DD /* activity_area_img@2x.png */; };
+		E3C3D2ED1AE9E0950055A0DD /* clock_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D2E91AE9E0950055A0DD /* clock_img@2x.png */; };
+		E3C3D2EE1AE9E0950055A0DD /* hot_comment_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D2EA1AE9E0950055A0DD /* hot_comment_img@2x.png */; };
+		E3C3D2EF1AE9E0950055A0DD /* week_joke_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D2EB1AE9E0950055A0DD /* week_joke_img@2x.png */; };
+		E3C3D2F21AE9E39D0055A0DD /* HHConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D2F11AE9E39D0055A0DD /* HHConfig.m */; };
+		E3C3D2F51AE9E9BC0055A0DD /* HotTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D2F41AE9E9BC0055A0DD /* HotTopicCell.m */; };
+		E3C3D2F71AE9EA150055A0DD /* topic_hot_flag_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D2F61AE9EA150055A0DD /* topic_hot_flag_img@2x.png */; };
 		E3D7818E1AE600E100EDC81F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7818D1AE600E100EDC81F /* HomeViewController.m */; };
 		E3D781911AE6018200EDC81F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781901AE6018200EDC81F /* DiscoverViewController.m */; };
 		E3D781941AE601F000EDC81F /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781931AE601F000EDC81F /* MsgViewController.m */; };
@@ -85,6 +92,15 @@
 		E389BD321AE5EEA800EA35B7 /* Public.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Public.h; sourceTree = "<group>"; };
 		E389BD331AE5EEDE00EA35B7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		E3C3D2E51AE93C440055A0DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E3C3D2E81AE9E0950055A0DD /* activity_area_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_area_img@2x.png"; sourceTree = "<group>"; };
+		E3C3D2E91AE9E0950055A0DD /* clock_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock_img@2x.png"; sourceTree = "<group>"; };
+		E3C3D2EA1AE9E0950055A0DD /* hot_comment_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hot_comment_img@2x.png"; sourceTree = "<group>"; };
+		E3C3D2EB1AE9E0950055A0DD /* week_joke_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "week_joke_img@2x.png"; sourceTree = "<group>"; };
+		E3C3D2F01AE9E39D0055A0DD /* HHConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHConfig.h; sourceTree = "<group>"; };
+		E3C3D2F11AE9E39D0055A0DD /* HHConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHConfig.m; sourceTree = "<group>"; };
+		E3C3D2F31AE9E9BC0055A0DD /* HotTopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicCell.h; sourceTree = "<group>"; };
+		E3C3D2F41AE9E9BC0055A0DD /* HotTopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicCell.m; sourceTree = "<group>"; };
+		E3C3D2F61AE9EA150055A0DD /* topic_hot_flag_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topic_hot_flag_img@2x.png"; sourceTree = "<group>"; };
 		E3D7818C1AE600E100EDC81F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		E3D7818D1AE600E100EDC81F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		E3D7818F1AE6018200EDC81F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
@@ -267,6 +283,8 @@
 			isa = PBXGroup;
 			children = (
 				E389BD321AE5EEA800EA35B7 /* Public.h */,
+				E3C3D2F01AE9E39D0055A0DD /* HHConfig.h */,
+				E3C3D2F11AE9E39D0055A0DD /* HHConfig.m */,
 			);
 			path = PublicClass;
 			sourceTree = "<group>";
@@ -274,6 +292,7 @@
 		E389BD171AE500F600EA35B7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E3C3D2E71AE9E0950055A0DD /* Discover */,
 				E3D781D51AE8BC0000EDC81F /* home */,
 				E389BD1D1AE5E76500EA35B7 /* tabbar */,
 			);
@@ -352,6 +371,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E3C3D2E71AE9E0950055A0DD /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				E3C3D2F61AE9EA150055A0DD /* topic_hot_flag_img@2x.png */,
+				E3C3D2E81AE9E0950055A0DD /* activity_area_img@2x.png */,
+				E3C3D2E91AE9E0950055A0DD /* clock_img@2x.png */,
+				E3C3D2EA1AE9E0950055A0DD /* hot_comment_img@2x.png */,
+				E3C3D2EB1AE9E0950055A0DD /* week_joke_img@2x.png */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
 		E3D781981AE6138700EDC81F /* XLScrollViewer */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +426,8 @@
 		E3D781AD1AE6208100EDC81F /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				E3C3D2F31AE9E9BC0055A0DD /* HotTopicCell.h */,
+				E3C3D2F41AE9E9BC0055A0DD /* HotTopicCell.m */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -561,6 +594,7 @@
 			files = (
 				E3D781D41AE8BB6300EDC81F /* CustomCell.xib in Resources */,
 				E389BD2E1AE5E76500EA35B7 /* message_normal_img@2x.png in Resources */,
+				E3C3D2F71AE9EA150055A0DD /* topic_hot_flag_img@2x.png in Resources */,
 				E3D781D71AE8BC0000EDC81F /* comment_empty_img@2x.png in Resources */,
 				E389BD291AE5E76500EA35B7 /* add_img_pressed@2x.png in Resources */,
 				E389BD311AE5E76500EA35B7 /* my_press_img@2x.png in Resources */,
@@ -570,12 +604,16 @@
 				E3D781B51AE6221000EDC81F /* ReAttentionCell.xib in Resources */,
 				E389BD281AE5E76500EA35B7 /* add_img_normal@2x.png in Resources */,
 				E3D781D91AE8C4C500EDC81F /* content_avatar_img.png in Resources */,
+				E3C3D2EE1AE9E0950055A0DD /* hot_comment_img@2x.png in Resources */,
 				E3D781CF1AE8B80A00EDC81F /* JokeCell.xib in Resources */,
 				E389BD2B1AE5E76500EA35B7 /* discovery_press_img@2x.png in Resources */,
 				E389BCF91AE4DA1B00EA35B7 /* Images.xcassets in Resources */,
 				E389BD2F1AE5E76500EA35B7 /* message_press_img@2x.png in Resources */,
 				E3C3D2E61AE93C440055A0DD /* Main.storyboard in Resources */,
 				E389BD301AE5E76500EA35B7 /* my_normal_img@2x.png in Resources */,
+				E3C3D2ED1AE9E0950055A0DD /* clock_img@2x.png in Resources */,
+				E3C3D2EF1AE9E0950055A0DD /* week_joke_img@2x.png in Resources */,
+				E3C3D2EC1AE9E0950055A0DD /* activity_area_img@2x.png in Resources */,
 				E389BD2A1AE5E76500EA35B7 /* discovery_normal_img@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,10 +665,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3C3D2F21AE9E39D0055A0DD /* HHConfig.m in Sources */,
 				E3D781C41AE7A1EA00EDC81F /* JokeModel.m in Sources */,
 				E3D781BA1AE641D700EDC81F /* ViewController.m in Sources */,
 				E3D7819B1AE6138700EDC81F /* XLScrollViewer.m in Sources */,
 				E3D781971AE6021100EDC81F /* MeViewController.m in Sources */,
+				E3C3D2F51AE9E9BC0055A0DD /* HotTopicCell.m in Sources */,
 				E389BCF11AE4DA1B00EA35B7 /* AppDelegate.m in Sources */,
 				E3D7819F1AE614A300EDC81F /* AttentionView.m in Sources */,
 				E3D781AB1AE61C8E00EDC81F /* WordView.m in Sources */,

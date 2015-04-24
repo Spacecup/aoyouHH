@@ -12,6 +12,7 @@
 #import "TuijianAttModel.h"
 #import "MJRefresh.h"
 #import "CustomCell.h"
+#import "HHConfig.h"
 
 @interface AttentionView ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -84,6 +85,7 @@ NSString *const AttentionCellIndentifier2 = @"myAttentionCell";
         NSLog(@"推荐关注成功");
         NSMutableArray *arr = [[NSMutableArray alloc] initWithArray:responseBody];
         _tuiJianArr = responseBody;
+        [HHConfig sharedManager].hotTopicArr = _tuiJianArr;
         [self.tableView reloadData];
         
     } failureBlock:^(NSString *error){

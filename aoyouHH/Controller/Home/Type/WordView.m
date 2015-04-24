@@ -155,7 +155,7 @@ NSString *const WordCellIndentifier = @"JokeCell";
         
         if (joke.pic!=nil) {
             //
-            NSString *urlStr = [NSString stringWithFormat:@"%@%@small/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
+            NSString *urlStr = [NSString stringWithFormat:@"%@%@normal/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
             NSURL *url = [NSURL URLWithString:urlStr];
             UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
             height = height + _marginTop + image.size.height;
