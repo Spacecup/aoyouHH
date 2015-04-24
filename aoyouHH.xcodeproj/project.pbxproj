@@ -31,6 +31,16 @@
 		E3C3D2F21AE9E39D0055A0DD /* HHConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D2F11AE9E39D0055A0DD /* HHConfig.m */; };
 		E3C3D2F51AE9E9BC0055A0DD /* HotTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D2F41AE9E9BC0055A0DD /* HotTopicCell.m */; };
 		E3C3D2F71AE9EA150055A0DD /* topic_hot_flag_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D2F61AE9EA150055A0DD /* topic_hot_flag_img@2x.png */; };
+		E3C3D2FA1AEA0CC00055A0DD /* JokeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D2F91AEA0CC00055A0DD /* JokeViewController.m */; };
+		E3C3D3061AEA1B970055A0DD /* item_green_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D3001AEA1B970055A0DD /* item_green_disable@2x.png */; };
+		E3C3D3071AEA1B970055A0DD /* item_green_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D3011AEA1B970055A0DD /* item_green_normal@2x.png */; };
+		E3C3D3081AEA1B970055A0DD /* item_green_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D3021AEA1B970055A0DD /* item_green_pressed@2x.png */; };
+		E3C3D3091AEA1B970055A0DD /* item_red_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D3031AEA1B970055A0DD /* item_red_disable@2x.png */; };
+		E3C3D30A1AEA1B970055A0DD /* item_red_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D3041AEA1B970055A0DD /* item_red_normal@2x.png */; };
+		E3C3D30B1AEA1B970055A0DD /* item_red_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D3051AEA1B970055A0DD /* item_red_pressed@2x.png */; };
+		E3C3D30E1AEA26BC0055A0DD /* item_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D30C1AEA26BC0055A0DD /* item_comment@2x.png */; };
+		E3C3D30F1AEA26BC0055A0DD /* share_btn_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D30D1AEA26BC0055A0DD /* share_btn_img@2x.png */; };
+		E3C3D3121AEA2B7E0055A0DD /* JokeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D3111AEA2B7E0055A0DD /* JokeDetailViewController.m */; };
 		E3D7818E1AE600E100EDC81F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7818D1AE600E100EDC81F /* HomeViewController.m */; };
 		E3D781911AE6018200EDC81F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781901AE6018200EDC81F /* DiscoverViewController.m */; };
 		E3D781941AE601F000EDC81F /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781931AE601F000EDC81F /* MsgViewController.m */; };
@@ -101,6 +111,19 @@
 		E3C3D2F31AE9E9BC0055A0DD /* HotTopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotTopicCell.h; sourceTree = "<group>"; };
 		E3C3D2F41AE9E9BC0055A0DD /* HotTopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotTopicCell.m; sourceTree = "<group>"; };
 		E3C3D2F61AE9EA150055A0DD /* topic_hot_flag_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "topic_hot_flag_img@2x.png"; sourceTree = "<group>"; };
+		E3C3D2F81AEA0CC00055A0DD /* JokeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JokeViewController.h; sourceTree = "<group>"; };
+		E3C3D2F91AEA0CC00055A0DD /* JokeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JokeViewController.m; sourceTree = "<group>"; };
+		E3C3D3001AEA1B970055A0DD /* item_green_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_green_disable@2x.png"; sourceTree = "<group>"; };
+		E3C3D3011AEA1B970055A0DD /* item_green_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_green_normal@2x.png"; sourceTree = "<group>"; };
+		E3C3D3021AEA1B970055A0DD /* item_green_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_green_pressed@2x.png"; sourceTree = "<group>"; };
+		E3C3D3031AEA1B970055A0DD /* item_red_disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_red_disable@2x.png"; sourceTree = "<group>"; };
+		E3C3D3041AEA1B970055A0DD /* item_red_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_red_normal@2x.png"; sourceTree = "<group>"; };
+		E3C3D3051AEA1B970055A0DD /* item_red_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_red_pressed@2x.png"; sourceTree = "<group>"; };
+		E3C3D30C1AEA26BC0055A0DD /* item_comment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_comment@2x.png"; sourceTree = "<group>"; };
+		E3C3D30D1AEA26BC0055A0DD /* share_btn_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_btn_img@2x.png"; sourceTree = "<group>"; };
+		E3C3D3101AEA2B7E0055A0DD /* JokeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JokeDetailViewController.h; sourceTree = "<group>"; };
+		E3C3D3111AEA2B7E0055A0DD /* JokeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JokeDetailViewController.m; sourceTree = "<group>"; };
+		E3C3D3131AEA2FDD0055A0DD /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		E3D7818C1AE600E100EDC81F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		E3D7818D1AE600E100EDC81F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		E3D7818F1AE6018200EDC81F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
@@ -285,6 +308,7 @@
 				E389BD321AE5EEA800EA35B7 /* Public.h */,
 				E3C3D2F01AE9E39D0055A0DD /* HHConfig.h */,
 				E3C3D2F11AE9E39D0055A0DD /* HHConfig.m */,
+				E3C3D3131AEA2FDD0055A0DD /* Constant.h */,
 			);
 			path = PublicClass;
 			sourceTree = "<group>";
@@ -292,6 +316,7 @@
 		E389BD171AE500F600EA35B7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E3C3D2FF1AEA1B970055A0DD /* JokeCell */,
 				E3C3D2E71AE9E0950055A0DD /* Discover */,
 				E3D781D51AE8BC0000EDC81F /* home */,
 				E389BD1D1AE5E76500EA35B7 /* tabbar */,
@@ -323,6 +348,10 @@
 				E3D781981AE6138700EDC81F /* XLScrollViewer */,
 				E3D7818C1AE600E100EDC81F /* HomeViewController.h */,
 				E3D7818D1AE600E100EDC81F /* HomeViewController.m */,
+				E3C3D2F81AEA0CC00055A0DD /* JokeViewController.h */,
+				E3C3D2F91AEA0CC00055A0DD /* JokeViewController.m */,
+				E3C3D3101AEA2B7E0055A0DD /* JokeDetailViewController.h */,
+				E3C3D3111AEA2B7E0055A0DD /* JokeDetailViewController.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -381,6 +410,21 @@
 				E3C3D2EB1AE9E0950055A0DD /* week_joke_img@2x.png */,
 			);
 			path = Discover;
+			sourceTree = "<group>";
+		};
+		E3C3D2FF1AEA1B970055A0DD /* JokeCell */ = {
+			isa = PBXGroup;
+			children = (
+				E3C3D30C1AEA26BC0055A0DD /* item_comment@2x.png */,
+				E3C3D30D1AEA26BC0055A0DD /* share_btn_img@2x.png */,
+				E3C3D3001AEA1B970055A0DD /* item_green_disable@2x.png */,
+				E3C3D3011AEA1B970055A0DD /* item_green_normal@2x.png */,
+				E3C3D3021AEA1B970055A0DD /* item_green_pressed@2x.png */,
+				E3C3D3031AEA1B970055A0DD /* item_red_disable@2x.png */,
+				E3C3D3041AEA1B970055A0DD /* item_red_normal@2x.png */,
+				E3C3D3051AEA1B970055A0DD /* item_red_pressed@2x.png */,
+			);
+			path = JokeCell;
 			sourceTree = "<group>";
 		};
 		E3D781981AE6138700EDC81F /* XLScrollViewer */ = {
@@ -602,18 +646,26 @@
 				E389BD2C1AE5E76500EA35B7 /* home_normal_img@2x.png in Resources */,
 				E389BD2D1AE5E76500EA35B7 /* home_press_img@2x.png in Resources */,
 				E3D781B51AE6221000EDC81F /* ReAttentionCell.xib in Resources */,
+				E3C3D30B1AEA1B970055A0DD /* item_red_pressed@2x.png in Resources */,
 				E389BD281AE5E76500EA35B7 /* add_img_normal@2x.png in Resources */,
 				E3D781D91AE8C4C500EDC81F /* content_avatar_img.png in Resources */,
 				E3C3D2EE1AE9E0950055A0DD /* hot_comment_img@2x.png in Resources */,
+				E3C3D3071AEA1B970055A0DD /* item_green_normal@2x.png in Resources */,
 				E3D781CF1AE8B80A00EDC81F /* JokeCell.xib in Resources */,
 				E389BD2B1AE5E76500EA35B7 /* discovery_press_img@2x.png in Resources */,
 				E389BCF91AE4DA1B00EA35B7 /* Images.xcassets in Resources */,
+				E3C3D3061AEA1B970055A0DD /* item_green_disable@2x.png in Resources */,
+				E3C3D3081AEA1B970055A0DD /* item_green_pressed@2x.png in Resources */,
 				E389BD2F1AE5E76500EA35B7 /* message_press_img@2x.png in Resources */,
+				E3C3D30E1AEA26BC0055A0DD /* item_comment@2x.png in Resources */,
 				E3C3D2E61AE93C440055A0DD /* Main.storyboard in Resources */,
 				E389BD301AE5E76500EA35B7 /* my_normal_img@2x.png in Resources */,
 				E3C3D2ED1AE9E0950055A0DD /* clock_img@2x.png in Resources */,
+				E3C3D30F1AEA26BC0055A0DD /* share_btn_img@2x.png in Resources */,
 				E3C3D2EF1AE9E0950055A0DD /* week_joke_img@2x.png in Resources */,
+				E3C3D30A1AEA1B970055A0DD /* item_red_normal@2x.png in Resources */,
 				E3C3D2EC1AE9E0950055A0DD /* activity_area_img@2x.png in Resources */,
+				E3C3D3091AEA1B970055A0DD /* item_red_disable@2x.png in Resources */,
 				E389BD2A1AE5E76500EA35B7 /* discovery_normal_img@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -672,6 +724,7 @@
 				E3D781971AE6021100EDC81F /* MeViewController.m in Sources */,
 				E3C3D2F51AE9E9BC0055A0DD /* HotTopicCell.m in Sources */,
 				E389BCF11AE4DA1B00EA35B7 /* AppDelegate.m in Sources */,
+				E3C3D2FA1AEA0CC00055A0DD /* JokeViewController.m in Sources */,
 				E3D7819F1AE614A300EDC81F /* AttentionView.m in Sources */,
 				E3D781AB1AE61C8E00EDC81F /* WordView.m in Sources */,
 				E3D781911AE6018200EDC81F /* DiscoverViewController.m in Sources */,
@@ -680,6 +733,7 @@
 				E3D781A51AE61C2E00EDC81F /* NewView.m in Sources */,
 				E389BCEE1AE4DA1B00EA35B7 /* main.m in Sources */,
 				E3D781941AE601F000EDC81F /* MsgViewController.m in Sources */,
+				E3C3D3121AEA2B7E0055A0DD /* JokeDetailViewController.m in Sources */,
 				E3D7818E1AE600E100EDC81F /* HomeViewController.m in Sources */,
 				E3D781D31AE8BB6300EDC81F /* CustomCell.m in Sources */,
 				E3D781A81AE61C6800EDC81F /* FunView.m in Sources */,

@@ -38,7 +38,8 @@
 #define X(view)    view.frame.origin.x
 #define Y(view)    view.frame.origin.y
 
-
+//5.常用对象
+#define APPDELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
 
 #endif

@@ -24,10 +24,15 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //
-        NSLog(@"1111");
+//        NSLog(@"1111");
         _marginTop = 5;
         self.joke = [[JokeModel alloc] init];
-        
+        if (self.imgType == nil) {
+            self.imgType = @"normal";
+        }else{
+            self.imgType = @"big";
+        }
+        NSLog(@"图片类型：%@",self.imgType);
         [self initViews];
     }
     return self;
@@ -79,6 +84,45 @@
     self.picImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, 0, 0)];
     [self.backView addSubview:self.picImg];
     
+    //横线
+    self.lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.picImg.frame)+_marginTop-0.5, screen_width, 0.5)];
+    self.lineView.backgroundColor = RGB(241, 241, 241);
+    [self.backView addSubview:self.lineView];
+    //绿
+    self.greenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.greenBtn.frame = CGRectMake(0, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 25);
+    [self.greenBtn setImage:[UIImage imageNamed:@"item_green_normal"] forState:UIControlStateNormal];
+    [self.greenBtn setImage:[UIImage imageNamed:@"item_green_pressed"] forState:UIControlStateSelected];
+    [self.greenBtn setImage:[UIImage imageNamed:@"item_green_disable"] forState:UIControlStateDisabled];
+    [self.greenBtn setTitle:@"69" forState:UIControlStateNormal];
+    [self.greenBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.greenBtn setFont:[UIFont systemFontOfSize:14]];
+    [self.backView addSubview:self.greenBtn];
+    //红
+    self.redBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.redBtn.frame = CGRectMake(screen_width/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 25);
+    [self.redBtn setImage:[UIImage imageNamed:@"item_red_normal"] forState:UIControlStateNormal];
+    [self.redBtn setImage:[UIImage imageNamed:@"item_red_pressed"] forState:UIControlStateSelected];
+    [self.redBtn setImage:[UIImage imageNamed:@"item_red_disable"] forState:UIControlStateDisabled];
+    [self.redBtn setTitle:@"69" forState:UIControlStateNormal];
+    [self.redBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.redBtn setFont:[UIFont systemFontOfSize:14]];
+    [self.backView addSubview:self.redBtn];
+    //评论
+    self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.commentBtn.frame = CGRectMake(screen_width*2/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 25);
+    [self.commentBtn setImage:[UIImage imageNamed:@"item_comment"] forState:UIControlStateNormal];
+    [self.commentBtn setImage:[UIImage imageNamed:@"item_comment"] forState:UIControlStateSelected];
+    [self.commentBtn setImage:[UIImage imageNamed:@"item_comment"] forState:UIControlStateDisabled];
+    [self.backView addSubview:self.commentBtn];
+    //分享
+    self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.shareBtn.frame = CGRectMake(screen_width*3/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 25);
+    [self.shareBtn setImage:[UIImage imageNamed:@"share_btn_img"] forState:UIControlStateNormal];
+    [self.shareBtn setImage:[UIImage imageNamed:@"share_btn_img"] forState:UIControlStateSelected];
+    [self.shareBtn setImage:[UIImage imageNamed:@"share_btn_img"] forState:UIControlStateDisabled];
+    [self.backView addSubview:self.shareBtn];
+    
 }
 
 - (void)awakeFromNib {
@@ -92,6 +136,8 @@
 }
 
 -(void)setJokeData:(JokeModel *)joke{
+    
+    NSLog(@"2222图片类型：%@",self.imgType);
     self.joke = joke;
     self.userNameLable.text = joke.user_name;
     self.timeLabel.text = joke.time;
@@ -99,7 +145,7 @@
     self.contentLabel.text = self.joke.content;
     if (self.joke.pic!=nil) {
         //
-        NSString *urlStr = [NSString stringWithFormat:@"%@%@small/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
+        NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@", URL_IMAGE, joke.pic.path,self.imgType, joke.pic.name];
         NSURL *url = [NSURL URLWithString:urlStr];
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
 //        NSLog(@"width:%f,height:%f",image.size.width,image.size.height);
@@ -113,7 +159,7 @@
 //    NSLog(@"contentSize.height:%f",contentSize.height);
     self.contentLabel.frame = CGRectMake(8, CGRectGetMaxY(self.userImg.frame)+_marginTop, screen_width-8*2, contentSize.height);
     if (self.joke.pic!=nil) {
-        NSString *urlStr = [NSString stringWithFormat:@"%@%@normal/%@", URL_IMAGE, self.joke.pic.path, self.joke.pic.name];
+        NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@", URL_IMAGE, self.joke.pic.path,self.imgType, self.joke.pic.name];
         NSURL *url = [NSURL URLWithString:urlStr];
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
 //        NSLog(@"width:%f,height:%f",image.size.width,image.size.height);
@@ -122,7 +168,15 @@
     }else{
         self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, 0, 0);
     }
-    self.backView.frame = CGRectMake(0, _marginTop, screen_width, CGRectGetMaxY(self.picImg.frame)+_marginTop);
+    
+    self.lineView.frame = CGRectMake(0, CGRectGetMaxY(self.picImg.frame)+_marginTop-0.5, screen_width, 0.5);
+    self.greenBtn.frame = CGRectMake(0, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 30);
+    self.redBtn.frame = CGRectMake(screen_width/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 30);
+    self.commentBtn.frame = CGRectMake(screen_width*2/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 30);
+    self.shareBtn.frame = CGRectMake(screen_width*3/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 30);
+    self.backView.frame = CGRectMake(0, _marginTop, screen_width, CGRectGetMaxY(self.greenBtn.frame));
+    
+    self.cellHeight = CGRectGetMaxY(self.backView.frame);
 }
 
 @end

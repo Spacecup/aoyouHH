@@ -33,5 +33,7 @@ typedef void(^FailureBolck)(NSString *error);
 #pragma mark 最火接口
 -(void)getHotestResule:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock;
 
+#pragma mark 获取一条笑话
+-(void)getOneJokeResule:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock;
 
 @end

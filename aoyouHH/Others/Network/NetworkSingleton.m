@@ -59,7 +59,7 @@
         successBlock(tuijianAtt);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        failureBolck(error);
+        failureBolck(error.localizedFailureReason);
     }];
 }
 
@@ -79,11 +79,27 @@
         
         successBlock(jokeArr);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        NSLog(@"error:%@",error);
+        NSLog(@"getHotestResule:%@",error);
         failureBlock(@"网络或者服务器错误");
     }];
 }
 
+#pragma mark 获取一条笑话
+-(void)getOneJokeResule:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock{
+    AFHTTPRequestOperationManager *manager = [self baseHtppRequest];
+    NSString *url = [NSString stringWithFormat:@"%@",URL_ROOT];
+    //转码
+    NSString *urlStr = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [manager POST:urlStr parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        NSMutableArray *jokeArr = [[NSMutableArray alloc] init];
+        jokeArr = [self getJokeFromDicArray:responseObject];
+        successBlock(jokeArr);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"getOneJokeResule:%@",error);
+        failureBlock(@"网络或者服务器错误");
+    }];
+}
 
 //==================================关注=======================================
 //推荐关注数组

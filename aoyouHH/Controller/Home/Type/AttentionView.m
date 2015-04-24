@@ -87,12 +87,11 @@ NSString *const AttentionCellIndentifier2 = @"myAttentionCell";
         _tuiJianArr = responseBody;
         [HHConfig sharedManager].hotTopicArr = _tuiJianArr;
         [self.tableView reloadData];
-        
+        [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
     } failureBlock:^(NSString *error){
         
         NSLog(error);
     }];
-    [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
 }
 
 /**

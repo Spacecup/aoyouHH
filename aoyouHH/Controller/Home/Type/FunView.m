@@ -65,7 +65,7 @@ NSString *const FunCellIndentifier = @"JokeCell";
     NSString *r = @"joke_list";
     NSString *drive_info = @"61f8612436df7ac7f0142a2de879846475f80000";
     NSString *page = [NSString stringWithFormat:@"%ld",currentPage];
-    NSString *offset = @"5";
+    NSString *offset = @"10";
     NSString *type = @"pic";
     NSDictionary *dic = @{
                           @"r":r,
@@ -75,7 +75,7 @@ NSString *const FunCellIndentifier = @"JokeCell";
                           @"type":type
                           };
     [[NetworkSingleton sharedManager] getHotestResule:dic successBlock:^(id responseBody){
-        NSLog(@"最火成功");
+        NSLog(@"趣图成功");
         for (JokeModel *joke in responseBody) {
             [_dataSources addObject:joke];
         }
@@ -164,7 +164,7 @@ NSString *const FunCellIndentifier = @"JokeCell";
         }else{
             height = height +_marginTop;
         }
-        
+        height = height +_marginTop+30;
         //        NSLog(@"222222height:%f",height);
         return height + _marginTop;
     }else{

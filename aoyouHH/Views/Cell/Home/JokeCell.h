@@ -20,8 +20,19 @@
 @property(nonatomic, strong) UILabel *contentLabel;
 @property(nonatomic, strong) UIImageView *picImg;
 
+@property(nonatomic, strong) UIView *lineView;
+@property(nonatomic, strong) UIButton *greenBtn;
+@property(nonatomic, strong) UIButton *redBtn;
+@property(nonatomic, strong) UIButton *commentBtn;
+@property(nonatomic, strong) UIButton *shareBtn;
+
+/**
+ *  图片大小类型，默认的时normal
+ */
+@property(nonatomic, strong) NSString *imgType;
 
 @property(nonatomic, strong) JokeModel *joke;
+@property(nonatomic, assign) CGFloat cellHeight;
 
 -(void)setJokeData:(JokeModel *)joke;
 

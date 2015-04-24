@@ -12,6 +12,7 @@
 #import "NewView.h"
 #import "FunView.h"
 #import "WordView.h"
+#import "JokeViewController.h"
 
 #import "NetworkSingleton.h"
 
@@ -42,6 +43,7 @@
     
     CGRect frame = CGRectMake(0, 20, screen_width, screen_height-49-20);
     NSArray *views = @[[AttentionView new],[HotView new],[NewView new],[FunView new],[WordView new]];
+//    NSArray *views = @[jokeVC.view,[HotView new],[NewView new],[FunView new],[WordView new]];
     NSArray *names = @[@"关注",@"最火",@"最新",@"趣图",@"文字"];
     //创建
     self.scroll = [XLScrollViewer scrollWithFrame:frame withViews:views withButtonNames:names withThreeAnimation:211];

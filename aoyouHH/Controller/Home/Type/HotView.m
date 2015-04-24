@@ -45,6 +45,7 @@ NSString *const HotestCellIndentifier = @"JokeCell";
     _dataSources = [[NSMutableArray alloc] init];
     _currentPage = 1;
     _marginTop = 5;
+    self.imgType = @"normal";
 }
 
 -(void)addMyTableView{
@@ -65,10 +66,13 @@ NSString *const HotestCellIndentifier = @"JokeCell";
 }
 
 -(void)getHotestData:(NSInteger)currentPage{
+    APPDELEGATE.hub = [MBProgressHUD showHUDAddedTo:APPDELEGATE.window animated:YES];
+    APPDELEGATE.hub.labelText = @"加载中...";
+    
     NSString *r = @"joke_list";
     NSString *drive_info = @"61f8612436df7ac7f0142a2de879846475f80000";
     NSString *page = [NSString stringWithFormat:@"%ld",currentPage];
-    NSString *offset = @"5";
+    NSString *offset = @"10";
     NSString *type = @"web_good";
     NSDictionary *dic = @{
                           @"r":r,
@@ -83,10 +87,12 @@ NSString *const HotestCellIndentifier = @"JokeCell";
             [_dataSources addObject:joke];
         }
         [self.tableView reloadData];
+        [APPDELEGATE.hub hide:YES];
+        [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
     } failureBlock:^(NSString *error){
-        NSLog(error);
+        [APPDELEGATE.hub hide:YES];
+        NSLog(@"%@",error);
     }];
-    [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
 }
 
 #pragma mark 集成刷新控件
@@ -94,7 +100,7 @@ NSString *const HotestCellIndentifier = @"JokeCell";
     //1.下拉刷新
     [self.tableView addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     //2.进入程序后自动刷新
-//    [self.tableView.header beginRefreshing];
+    [self.tableView.header beginRefreshing];
     
     //3.上拉加载更多(进入刷新状态就会调用self的footerRefreshing)
     [self.tableView addLegendFooterWithRefreshingTarget:self refreshingAction:@selector(footerRefreshing)];
@@ -141,6 +147,7 @@ NSString *const HotestCellIndentifier = @"JokeCell";
     if (_dataSources.count>0) {
         //
         JokeModel *joke = _dataSources[indexPath.row];
+        cell.imgType = self.imgType;
         [cell setJokeData:joke];
         [cell resizeHeight];
     }
@@ -160,14 +167,14 @@ NSString *const HotestCellIndentifier = @"JokeCell";
         
         if (joke.pic!=nil) {
             //
-            NSString *urlStr = [NSString stringWithFormat:@"%@%@normal/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
+            NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@", URL_IMAGE, joke.pic.path, self.imgType, joke.pic.name];
             NSURL *url = [NSURL URLWithString:urlStr];
             UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
             height = height + _marginTop + image.size.height;
         }else{
             height = height +_marginTop;
         }
-        
+        height = height +_marginTop+30;
 //        NSLog(@"222222height:%f",height);
         return height + _marginTop;
     }else{

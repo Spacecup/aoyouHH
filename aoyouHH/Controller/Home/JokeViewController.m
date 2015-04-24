@@ -1,18 +1,20 @@
 //
-//  WordView.m
+//  JokeViewController.m
 //  aoyouHH
 //
-//  Created by jinzelu on 15/4/21.
+//  Created by jinzelu on 15/4/24.
 //  Copyright (c) 2015年 jinzelu. All rights reserved.
 //
 
-#import "WordView.h"
+#import "JokeViewController.h"
 #import "MJRefresh.h"
 #import "JokeModel.h"
 #import "JokeCell.h"
 #import "NetworkSingleton.h"
+#import "JokeDetailViewController.h"
 
-@interface WordView ()<UITableViewDataSource,UITableViewDelegate>
+
+@interface JokeViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *_dataSources;
     NSInteger _currentPage;
@@ -22,18 +24,24 @@
 
 @end
 
-NSString *const WordCellIndentifier = @"JokeCell";
+NSString *const JokeCellIndentifier = @"JokeCell";
 
-@implementation WordView
+@implementation JokeViewController
 
--(instancetype)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        [self initData];
-        [self addMyTableView];
-    }
-    return self;
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self initData];
+    [self addMyTableView];
+    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 -(void)initData{
@@ -43,45 +51,14 @@ NSString *const WordCellIndentifier = @"JokeCell";
 }
 
 -(void)addMyTableView{
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screen_width, screen_height-64-49)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screen_width, screen_height-49)];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = RGB(241, 241, 241);
-    [self.tableView registerClass:[JokeCell class] forCellReuseIdentifier:WordCellIndentifier];
+    [self.tableView registerClass:[JokeCell class] forCellReuseIdentifier:JokeCellIndentifier];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     [self setupRefresh];
-}
-
--(void)loadFirstPageData{
-    _currentPage = 1;
-    [_dataSources removeAllObjects];
-    [self getHotestData:_currentPage];
-}
-
--(void)getHotestData:(NSInteger)currentPage{
-    NSString *r = @"joke_list";
-    NSString *drive_info = @"61f8612436df7ac7f0142a2de879846475f80000";
-    NSString *page = [NSString stringWithFormat:@"%ld",currentPage];
-    NSString *offset = @"10";
-    NSString *type = @"text";
-    NSDictionary *dic = @{
-                          @"r":r,
-                          @"drive_info":drive_info,
-                          @"page":page,
-                          @"offset":offset,
-                          @"type":type
-                          };
-    [[NetworkSingleton sharedManager] getHotestResule:dic successBlock:^(id responseBody){
-        NSLog(@"文字成功");
-        for (JokeModel *joke in responseBody) {
-            [_dataSources addObject:joke];
-        }
-        [self.tableView reloadData];
-    } failureBlock:^(NSString *error){
-        NSLog(error);
-    }];
-    [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
 }
 
 #pragma mark 集成刷新控件
@@ -89,7 +66,7 @@ NSString *const WordCellIndentifier = @"JokeCell";
     //1.下拉刷新
     [self.tableView addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
     //2.进入程序后自动刷新
-    //    [self.tableView.header beginRefreshing];
+    [self.tableView.header beginRefreshing];
     
     //3.上拉加载更多(进入刷新状态就会调用self的footerRefreshing)
     [self.tableView addLegendFooterWithRefreshingTarget:self refreshingAction:@selector(footerRefreshing)];
@@ -123,7 +100,41 @@ NSString *const WordCellIndentifier = @"JokeCell";
     [self.tableView.footer endRefreshing];
 }
 
+-(void)loadFirstPageData{
+    _currentPage = 1;
+    [_dataSources removeAllObjects];
+    [self getHotestData:_currentPage];
+}
 
+-(void)getHotestData:(NSInteger)currentPage{
+    APPDELEGATE.hub = [MBProgressHUD showHUDAddedTo:APPDELEGATE.window animated:YES];
+    APPDELEGATE.hub.labelText = @"加载中...";
+    
+    NSString *r = @"joke_list";
+    NSString *drive_info = @"61f8612436df7ac7f0142a2de879846475f80000";
+    NSString *page = [NSString stringWithFormat:@"%ld",currentPage];
+    NSString *offset = @"10";
+    NSString *type = @"web_good";
+    NSDictionary *dic = @{
+                          @"r":r,
+                          @"drive_info":drive_info,
+                          @"page":page,
+                          @"offset":offset,
+                          @"type":type
+                          };
+    [[NetworkSingleton sharedManager] getHotestResule:dic successBlock:^(id responseBody){
+        NSLog(@"最火成功");
+        for (JokeModel *joke in responseBody) {
+            [_dataSources addObject:joke];
+        }
+        [self.tableView reloadData];
+        [APPDELEGATE.hub hide:YES];
+        [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
+    } failureBlock:^(NSString *error){
+        [APPDELEGATE.hub hide:YES];
+        NSLog(error);
+    }];
+}
 
 #pragma mark - UITableViewDataSource
 //行数
@@ -132,7 +143,7 @@ NSString *const WordCellIndentifier = @"JokeCell";
 }
 //cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    JokeCell *cell = (JokeCell *)[tableView dequeueReusableCellWithIdentifier:WordCellIndentifier];
+    JokeCell *cell = (JokeCell *)[tableView dequeueReusableCellWithIdentifier:JokeCellIndentifier];
     if (_dataSources.count>0) {
         //
         JokeModel *joke = _dataSources[indexPath.row];
@@ -171,15 +182,25 @@ NSString *const WordCellIndentifier = @"JokeCell";
     
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    JokeModel *joke = [[JokeModel alloc] init];
+    joke = _dataSources[indexPath.row];
+    NSLog(@"joke:%@",joke);
+    JokeDetailViewController *jokeDetailVC = [[JokeDetailViewController alloc] init];
+    jokeDetailVC.joke = joke;
+    [self.navigationController pushViewController:jokeDetailVC animated:YES];
+}
 
 
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
 */
 

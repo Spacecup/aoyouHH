@@ -11,6 +11,8 @@
 #import "TuijianAttModel.h"
 #import "NetworkSingleton.h"
 #import "HotTopicCell.h"
+#import "MJRefresh.h"
+#import "JokeViewController.h"
 
 @interface DiscoverViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -73,9 +75,8 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screen_width, screen_height-49) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-//    self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.view addSubview:self.tableView];
-    
+    [self setupRefresh];
     [self loadFirstPageData];
 }
 
@@ -85,6 +86,9 @@
 }
 
 -(void)loadData:(NSInteger)Page{
+    APPDELEGATE.hub = [MBProgressHUD showHUDAddedTo:APPDELEGATE.window animated:YES];
+    APPDELEGATE.hub.labelText = @"加载中...";
+    
     NSString *r = @"topic";
     NSString *login_info = @"010000005EBBA6009CE535551C1917574FAFAE4E8BF03B02E6AD6D074AD69809B5AD76DFB9B12D28";
     NSString *page = [NSString stringWithFormat:@"%ld",(long)Page];
@@ -95,14 +99,56 @@
                           @"type":type};
     [[NetworkSingleton sharedManager] getTuijianAttResult:dic successBlock:^(id responseBody){
         NSLog(@"热门话题成功");
-        NSMutableArray *arr = [[NSMutableArray alloc] initWithArray:responseBody];
-        _dataArr3 = responseBody;
+        for (TuijianAttModel *tuijian in responseBody) {
+            [_dataArr3 addObject:tuijian];
+        }
         [self.tableView reloadData];
+        [APPDELEGATE.hub hide:YES];
+        [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
         
     } failureBlock:^(NSString *error){
-        NSLog(error);
+        [APPDELEGATE.hub hide:YES];
+        NSLog(@"%@",error);
     }];
-//    [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
+}
+
+/**
+ *  集成刷新控件
+ */
+-(void)setupRefresh{
+    //1.下拉刷新
+    //    [self.tableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
+//    [self.tableView addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
+    //2.进入程序后自动刷新
+    [self.tableView.header beginRefreshing];
+    
+    //3.上拉加载更多(进入刷新状态就会调用self的footerRefreshing)
+    //    [self.tableView addFooterWithTarget:self action:@selector(footerRefreshing)];
+    [self.tableView addLegendFooterWithRefreshingTarget:self refreshingAction:@selector(footerRefreshing)];
+    
+    //设置文字(也可不设置,默认的文字在MJRefreshConst中修改))
+    [self.tableView.header setTitle:@"下拉刷新" forState:MJRefreshHeaderStateIdle];
+    [self.tableView.header setTitle:@"松开刷新" forState:MJRefreshHeaderStatePulling];
+    [self.tableView.header setTitle:@"刷新中" forState:MJRefreshHeaderStateRefreshing];
+    
+    [self.tableView.footer setTitle:@"点击或上拉加载更多" forState:MJRefreshFooterStateIdle];
+    [self.tableView.footer setTitle:@"加载中..." forState:MJRefreshFooterStateRefreshing];
+    [self.tableView.footer setTitle:@"没有更多" forState:MJRefreshFooterStateNoMoreData];
+}
+#pragma mark 开始进入刷新状态
+-(void)headerRefreshing{
+    [self loadFirstPageData];
+}
+#pragma mark 下拉刷新
+-(void)footerRefreshing{
+    _currentPage++;
+    [self loadData:_currentPage];
+}
+#pragma mark 刷新tableview
+-(void)reloadTable{
+    //    [self.tableView reloadData];
+    [self.tableView.header endRefreshing];
+    [self.tableView.footer endRefreshing];
 }
 
 
@@ -193,6 +239,18 @@
     }else{
         return @"热门话题";
     }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    JokeViewController *jokeVC = [[JokeViewController alloc] init];
+    if (indexPath.section == 0) {
+        jokeVC.title = [_dataArr1[indexPath.row] objectForKey:@"title"];
+    }else if (indexPath.section == 1){
+        jokeVC.title = ((TuijianAttModel *)(_dataArr2[indexPath.row])).content;
+    }else{
+        jokeVC.title = ((TuijianAttModel *)(_dataArr2[indexPath.row])).content;
+    }
+    [self.navigationController pushViewController:jokeVC animated:YES];
 }
 
 
