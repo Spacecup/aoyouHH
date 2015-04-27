@@ -13,6 +13,8 @@
 @interface JokeCell ()
 {
     NSInteger _marginTop;
+    CGFloat _picWidth;
+    CGFloat _picHeight;
 }
 
 @end
@@ -142,14 +144,18 @@
     self.userNameLable.text = joke.user_name;
     self.timeLabel.text = joke.time;
     [self.userImg sd_setImageWithURL:[NSURL URLWithString:self.joke.user_pic] placeholderImage:[UIImage imageNamed:@"content_avatar_img"]];
-    self.contentLabel.text = self.joke.content;
+//    self.contentLabel.text = self.joke.content;
+    self.contentLabel.text = [self.joke.content stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
     if (self.joke.pic!=nil) {
         //
-        NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@", URL_IMAGE, joke.pic.path,self.imgType, joke.pic.name];
-        NSURL *url = [NSURL URLWithString:urlStr];
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+//        NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@", URL_IMAGE, joke.pic.path,self.imgType, joke.pic.name];
+//        NSURL *url = [NSURL URLWithString:urlStr];
+//        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
 //        NSLog(@"width:%f,height:%f",image.size.width,image.size.height);
     }
+    
+    [self.greenBtn setTitle:[NSString stringWithFormat:@"%@",self.joke.good] forState:UIControlStateNormal];
+    [self.redBtn setTitle:[NSString stringWithFormat:@"%@",self.joke.bad] forState:UIControlStateNormal];
 
 }
 

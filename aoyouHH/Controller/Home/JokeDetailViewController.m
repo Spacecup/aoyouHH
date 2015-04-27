@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = RGB(241, 241, 241);
     [self addJokeViews];
-    [self loadJokeData];
+//    [self loadJokeData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,14 +40,19 @@
 }
 
 -(void)addJokeViews{
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screen_width, screen_height) style:UITableViewStylePlain];
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.tableView];
     
-    JokeCell *cell = [[JokeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"jokeCell"];
-    [cell setJokeData:self.joke];
-    [cell resizeHeight];
     
-    _backView = [[UIView alloc] initWithFrame:CGRectMake(0, 64+5, screen_width, cell.cellHeight)];
-    [_backView addSubview:cell];
-    [self.view addSubview:_backView];
+    
+//    JokeCell *cell = [[JokeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"jokeCell"];
+//    [cell setJokeData:self.joke];
+//    [cell resizeHeight];
+//    
+//    _backView = [[UIView alloc] initWithFrame:CGRectMake(0, 5, screen_width, cell.cellHeight)];
+//    [_backView addSubview:cell];
+//    [self.view addSubview:_backView];
     
 }
 

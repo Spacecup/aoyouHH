@@ -41,6 +41,8 @@
 		E3C3D30E1AEA26BC0055A0DD /* item_comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D30C1AEA26BC0055A0DD /* item_comment@2x.png */; };
 		E3C3D30F1AEA26BC0055A0DD /* share_btn_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D30D1AEA26BC0055A0DD /* share_btn_img@2x.png */; };
 		E3C3D3121AEA2B7E0055A0DD /* JokeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D3111AEA2B7E0055A0DD /* JokeDetailViewController.m */; };
+		E3C3D4AA1AEE1F500055A0DD /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D4A91AEE1F500055A0DD /* AlbumViewController.m */; };
+		E3C3D4AD1AEE34030055A0DD /* JZAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D4AC1AEE34030055A0DD /* JZAlbumViewController.m */; };
 		E3D7818E1AE600E100EDC81F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7818D1AE600E100EDC81F /* HomeViewController.m */; };
 		E3D781911AE6018200EDC81F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781901AE6018200EDC81F /* DiscoverViewController.m */; };
 		E3D781941AE601F000EDC81F /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781931AE601F000EDC81F /* MsgViewController.m */; };
@@ -124,6 +126,10 @@
 		E3C3D3101AEA2B7E0055A0DD /* JokeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JokeDetailViewController.h; sourceTree = "<group>"; };
 		E3C3D3111AEA2B7E0055A0DD /* JokeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JokeDetailViewController.m; sourceTree = "<group>"; };
 		E3C3D3131AEA2FDD0055A0DD /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		E3C3D4A81AEE1F500055A0DD /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
+		E3C3D4A91AEE1F500055A0DD /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
+		E3C3D4AB1AEE34030055A0DD /* JZAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZAlbumViewController.h; sourceTree = "<group>"; };
+		E3C3D4AC1AEE34030055A0DD /* JZAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZAlbumViewController.m; sourceTree = "<group>"; };
 		E3D7818C1AE600E100EDC81F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		E3D7818D1AE600E100EDC81F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		E3D7818F1AE6018200EDC81F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
@@ -286,6 +292,7 @@
 		E389BD141AE500F600EA35B7 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				E3C3D3141AEDD72E0055A0DD /* 3tdParts */,
 				E389BD151AE500F600EA35B7 /* Network */,
 				E389BD161AE500F600EA35B7 /* PublicClass */,
 				E389BD171AE500F600EA35B7 /* Resource */,
@@ -327,7 +334,11 @@
 		E389BD181AE500F600EA35B7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E3C3D4A81AEE1F500055A0DD /* AlbumViewController.h */,
+				E3C3D4A91AEE1F500055A0DD /* AlbumViewController.m */,
 				E3D781AC1AE6208100EDC81F /* Cell */,
+				E3C3D4AB1AEE34030055A0DD /* JZAlbumViewController.h */,
+				E3C3D4AC1AEE34030055A0DD /* JZAlbumViewController.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -425,6 +436,13 @@
 				E3C3D3051AEA1B970055A0DD /* item_red_pressed@2x.png */,
 			);
 			path = JokeCell;
+			sourceTree = "<group>";
+		};
+		E3C3D3141AEDD72E0055A0DD /* 3tdParts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 3tdParts;
 			sourceTree = "<group>";
 		};
 		E3D781981AE6138700EDC81F /* XLScrollViewer */ = {
@@ -728,6 +746,7 @@
 				E3D7819F1AE614A300EDC81F /* AttentionView.m in Sources */,
 				E3D781AB1AE61C8E00EDC81F /* WordView.m in Sources */,
 				E3D781911AE6018200EDC81F /* DiscoverViewController.m in Sources */,
+				E3C3D4AA1AEE1F500055A0DD /* AlbumViewController.m in Sources */,
 				E3D781CA1AE883B900EDC81F /* TuijianAttModel.m in Sources */,
 				E3D781B71AE6413100EDC81F /* ReAttentionCell.m in Sources */,
 				E3D781A51AE61C2E00EDC81F /* NewView.m in Sources */,
@@ -736,6 +755,7 @@
 				E3C3D3121AEA2B7E0055A0DD /* JokeDetailViewController.m in Sources */,
 				E3D7818E1AE600E100EDC81F /* HomeViewController.m in Sources */,
 				E3D781D31AE8BB6300EDC81F /* CustomCell.m in Sources */,
+				E3C3D4AD1AEE34030055A0DD /* JZAlbumViewController.m in Sources */,
 				E3D781A81AE61C6800EDC81F /* FunView.m in Sources */,
 				E3D781A21AE61C0900EDC81F /* HotView.m in Sources */,
 				E3D781BD1AE78D9300EDC81F /* NetworkSingleton.m in Sources */,

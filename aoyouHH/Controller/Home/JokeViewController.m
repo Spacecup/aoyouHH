@@ -12,7 +12,8 @@
 #import "JokeCell.h"
 #import "NetworkSingleton.h"
 #import "JokeDetailViewController.h"
-
+#import "AlbumViewController.h"
+#import "JZAlbumViewController.h"
 
 @interface JokeViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -28,7 +29,14 @@ NSString *const JokeCellIndentifier = @"JokeCell";
 
 @implementation JokeViewController
 
-
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        //
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,7 +59,7 @@ NSString *const JokeCellIndentifier = @"JokeCell";
 }
 
 -(void)addMyTableView{
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screen_width, screen_height-49)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screen_width, screen_height)];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = RGB(241, 241, 241);
@@ -132,9 +140,44 @@ NSString *const JokeCellIndentifier = @"JokeCell";
         [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
     } failureBlock:^(NSString *error){
         [APPDELEGATE.hub hide:YES];
-        NSLog(error);
+        NSLog(@"%@",error);
     }];
 }
+
+-(void)OnTapPicImg:(UITapGestureRecognizer *)sender{
+//    NSLog(@"aa==%@",[sender.view superview]);
+//    NSLog(@"bb==%@",[[sender.view superview] superview]);
+//    [_tableView indexPathForCell:[[sender.view superview] superview]];
+   
+/*    NSInteger tag = sender.view.tag;
+    JokeModel *joke = _dataSources[tag-6000];
+    
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@big/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+    NSLog(@"tag:%ld",tag);
+    NSMutableArray *imgArray = [[NSMutableArray alloc] init];
+    [imgArray addObject:image];
+    AlbumViewController *albumVC = [[AlbumViewController alloc] init];
+    albumVC.imgs = imgArray;
+    albumVC.imageTag = 6000;
+    albumVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:albumVC animated:YES];
+ */
+    NSInteger tag = sender.view.tag;
+    JokeModel *joke = _dataSources[tag-6000];
+    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc] init];
+    NSMutableArray *imgArray = [[NSMutableArray alloc] init];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@big/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
+    [imgArray addObject:urlStr];
+    [imgArray addObject:urlStr];
+    jzAlbumVC.imgArr = imgArray;
+    [self presentModalViewController:jzAlbumVC animated:YES];
+//    [self presentViewController:<#(UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>]
+//    [self.navigationController pushViewController:jzAlbumVC animated:YES];
+}
+
+
 
 #pragma mark - UITableViewDataSource
 //行数
@@ -151,6 +194,11 @@ NSString *const JokeCellIndentifier = @"JokeCell";
         [cell resizeHeight];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnTapPicImg:)];
+    [cell.picImg addGestureRecognizer:tap];
+    cell.picImg.userInteractionEnabled = YES;//不能少了这句
+    cell.picImg.tag = 6000+indexPath.row;
+    
     return cell;
 }
 
@@ -183,6 +231,7 @@ NSString *const JokeCellIndentifier = @"JokeCell";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     JokeModel *joke = [[JokeModel alloc] init];
     joke = _dataSources[indexPath.row];
     NSLog(@"joke:%@",joke);
