@@ -165,7 +165,6 @@ NSString *const HotestCellIndentifier = @"JokeCell";
         JokeModel *joke = _dataSources[indexPath.row];
         cell.imgType = self.imgType;
         [cell setJokeData:joke];
-        [cell resizeHeight];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnTapPicImg:)];

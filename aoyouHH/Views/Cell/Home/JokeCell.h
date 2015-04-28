@@ -30,9 +30,19 @@
  *  图片大小类型，默认的时normal
  */
 @property(nonatomic, strong) NSString *imgType;
-
+/**
+ *  cell的数据
+ */
 @property(nonatomic, strong) JokeModel *joke;
+/**
+ *  cell的高度
+ */
 @property(nonatomic, assign) CGFloat cellHeight;
+/**
+ *  cell content显示格式,默认为0，最多显示5行；如果为1，则有多少显示多少
+ */
+@property(nonatomic, assign) NSInteger contentType;
+
 
 -(void)setJokeData:(JokeModel *)joke;
 

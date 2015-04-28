@@ -179,7 +179,6 @@ NSString *const JokeCellIndentifier = @"JokeCell";
         //
         JokeModel *joke = _dataSources[indexPath.row];
         [cell setJokeData:joke];
-        [cell resizeHeight];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnTapPicImg:)];
@@ -222,9 +221,12 @@ NSString *const JokeCellIndentifier = @"JokeCell";
     
     JokeModel *joke = [[JokeModel alloc] init];
     joke = _dataSources[indexPath.row];
-    NSLog(@"joke:%@",joke);
+    
     JokeDetailViewController *jokeDetailVC = [[JokeDetailViewController alloc] init];
     jokeDetailVC.joke = joke;
+    
+//    JokeDetailViewController *jokeDetailVC = [JokeDetailViewController shareManeger];
+//    [jokeDetailVC setData:joke];
     [self.navigationController pushViewController:jokeDetailVC animated:YES];
 }
 

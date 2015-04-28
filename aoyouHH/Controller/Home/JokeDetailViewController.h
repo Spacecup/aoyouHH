@@ -18,4 +18,8 @@
 
 @property(nonatomic, strong) UITableView *tableView;
 
++(JokeDetailViewController *)shareManeger;
+
+-(void)setData:(JokeModel *)joke;
+
 @end

@@ -58,6 +58,8 @@
     }
     self.contentLabel.text = self.tuijianArr.content;
     self.numberLable.text = [NSString stringWithFormat:@"%@",self.tuijianArr.number];
+    
+    [self resizeHeight];
 }
 
 -(void)resizeHeight{

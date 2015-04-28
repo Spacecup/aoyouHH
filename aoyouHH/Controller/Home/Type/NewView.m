@@ -138,7 +138,7 @@ NSString *const NewCellIndentifier = @"JokeCell";
         //
         JokeModel *joke = _dataSources[indexPath.row];
         [cell setJokeData:joke];
-        [cell resizeHeight];
+
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

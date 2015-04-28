@@ -211,7 +211,6 @@
             TuijianAttModel *tuijianModel = [[TuijianAttModel alloc] init];
             tuijianModel = _dataArr3[indexPath.row];
             [cell setData:tuijianModel];
-            [cell resizeHeight];
         }
         
         return cell;
