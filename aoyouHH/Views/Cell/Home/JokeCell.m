@@ -185,4 +185,8 @@
     self.cellHeight = CGRectGetMaxY(self.backView.frame);
 }
 
+-(void)layoutSubviews{
+    NSLog(@"layoutSubviews");
+}
+
 @end

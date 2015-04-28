@@ -13,10 +13,10 @@
 #import "FunView.h"
 #import "WordView.h"
 #import "JokeViewController.h"
-
+#import "JZAlbumViewController.h"
 #import "NetworkSingleton.h"
 
-@interface HomeViewController ()
+@interface HomeViewController ()<HotViewDelegate>
 
 @end
 
@@ -42,7 +42,14 @@
     [self.view addSubview:statusBarView];
     
     CGRect frame = CGRectMake(0, 20, screen_width, screen_height-49-20);
-    NSArray *views = @[[AttentionView new],[HotView new],[NewView new],[FunView new],[WordView new]];
+    UIView *v1 = [AttentionView new];
+    HotView *v2 = [[HotView alloc] init];
+    UIView *v3 = [NewView new];
+    UIView *v4 = [FunView new];
+    UIView *v5 = [WordView new];
+    v2.delegate = self;
+    NSArray *views = @[v1, v2,v3,v4,v5];
+//    NSArray *views = @[[AttentionView new],[HotView new],[NewView new],[FunView new],[WordView new]];
 //    NSArray *views = @[jokeVC.view,[HotView new],[NewView new],[FunView new],[WordView new]];
     NSArray *names = @[@"关注",@"最火",@"最新",@"趣图",@"文字"];
     //创建
@@ -56,6 +63,14 @@
     
     //加入
     [self.view addSubview:self.scroll];
+}
+
+#pragma mark - HotViewDelegate
+-(void)didSelectImage:(NSArray *)imageArr currentIndex:(NSInteger)currentIndex{
+    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc] init];
+    jzAlbumVC.imgArr = imageArr;
+    jzAlbumVC.currentIndex = currentIndex;
+    [self presentViewController:jzAlbumVC animated:YES completion:nil];
 }
 
 

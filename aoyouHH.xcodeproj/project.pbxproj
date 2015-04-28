@@ -43,6 +43,7 @@
 		E3C3D3121AEA2B7E0055A0DD /* JokeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D3111AEA2B7E0055A0DD /* JokeDetailViewController.m */; };
 		E3C3D4AA1AEE1F500055A0DD /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D4A91AEE1F500055A0DD /* AlbumViewController.m */; };
 		E3C3D4AD1AEE34030055A0DD /* JZAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D4AC1AEE34030055A0DD /* JZAlbumViewController.m */; };
+		E3C3D55F1AEF211C0055A0DD /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D55E1AEF211C0055A0DD /* UIImageView+UIActivityIndicatorForSDWebImage.m */; };
 		E3D7818E1AE600E100EDC81F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7818D1AE600E100EDC81F /* HomeViewController.m */; };
 		E3D781911AE6018200EDC81F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781901AE6018200EDC81F /* DiscoverViewController.m */; };
 		E3D781941AE601F000EDC81F /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781931AE601F000EDC81F /* MsgViewController.m */; };
@@ -130,6 +131,8 @@
 		E3C3D4A91AEE1F500055A0DD /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
 		E3C3D4AB1AEE34030055A0DD /* JZAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZAlbumViewController.h; sourceTree = "<group>"; };
 		E3C3D4AC1AEE34030055A0DD /* JZAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZAlbumViewController.m; sourceTree = "<group>"; };
+		E3C3D55D1AEF211C0055A0DD /* UIImageView+UIActivityIndicatorForSDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+UIActivityIndicatorForSDWebImage.h"; sourceTree = "<group>"; };
+		E3C3D55E1AEF211C0055A0DD /* UIImageView+UIActivityIndicatorForSDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+UIActivityIndicatorForSDWebImage.m"; sourceTree = "<group>"; };
 		E3D7818C1AE600E100EDC81F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		E3D7818D1AE600E100EDC81F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		E3D7818F1AE6018200EDC81F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
@@ -334,9 +337,9 @@
 		E389BD181AE500F600EA35B7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E3D781AC1AE6208100EDC81F /* Cell */,
 				E3C3D4A81AEE1F500055A0DD /* AlbumViewController.h */,
 				E3C3D4A91AEE1F500055A0DD /* AlbumViewController.m */,
-				E3D781AC1AE6208100EDC81F /* Cell */,
 				E3C3D4AB1AEE34030055A0DD /* JZAlbumViewController.h */,
 				E3C3D4AC1AEE34030055A0DD /* JZAlbumViewController.m */,
 			);
@@ -441,8 +444,18 @@
 		E3C3D3141AEDD72E0055A0DD /* 3tdParts */ = {
 			isa = PBXGroup;
 			children = (
+				E3C3D55C1AEF211C0055A0DD /* UIActivityIndicator */,
 			);
 			path = 3tdParts;
+			sourceTree = "<group>";
+		};
+		E3C3D55C1AEF211C0055A0DD /* UIActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				E3C3D55D1AEF211C0055A0DD /* UIImageView+UIActivityIndicatorForSDWebImage.h */,
+				E3C3D55E1AEF211C0055A0DD /* UIImageView+UIActivityIndicatorForSDWebImage.m */,
+			);
+			path = UIActivityIndicator;
 			sourceTree = "<group>";
 		};
 		E3D781981AE6138700EDC81F /* XLScrollViewer */ = {
@@ -748,6 +761,7 @@
 				E3D781911AE6018200EDC81F /* DiscoverViewController.m in Sources */,
 				E3C3D4AA1AEE1F500055A0DD /* AlbumViewController.m in Sources */,
 				E3D781CA1AE883B900EDC81F /* TuijianAttModel.m in Sources */,
+				E3C3D55F1AEF211C0055A0DD /* UIImageView+UIActivityIndicatorForSDWebImage.m in Sources */,
 				E3D781B71AE6413100EDC81F /* ReAttentionCell.m in Sources */,
 				E3D781A51AE61C2E00EDC81F /* NewView.m in Sources */,
 				E389BCEE1AE4DA1B00EA35B7 /* main.m in Sources */,

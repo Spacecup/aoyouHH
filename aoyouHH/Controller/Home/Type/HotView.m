@@ -95,6 +95,22 @@ NSString *const HotestCellIndentifier = @"JokeCell";
     }];
 }
 
+-(void)OnTapPicImg:(UITapGestureRecognizer *)sender{
+    NSInteger tag = sender.view.tag;
+    JokeModel *joke = _dataSources[tag-6000];
+    NSMutableArray *imgArray = [[NSMutableArray alloc] init];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@big/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
+    [imgArray addObject:urlStr];
+    [imgArray addObject:urlStr];
+    [imgArray addObject:urlStr];
+    [self.delegate didSelectImage:imgArray currentIndex:0];
+    
+//    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc] init];
+//    jzAlbumVC.imgArr = imgArray;
+//    jzAlbumVC.currentIndex = 1;
+//    [self presentModalViewController:jzAlbumVC animated:YES];
+}
+
 #pragma mark 集成刷新控件
 -(void)setupRefresh{
     //1.下拉刷新
@@ -152,6 +168,12 @@ NSString *const HotestCellIndentifier = @"JokeCell";
         [cell resizeHeight];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnTapPicImg:)];
+    [cell.picImg addGestureRecognizer:tap];
+    cell.picImg.userInteractionEnabled = YES;//不能少了这句
+    cell.picImg.tag = 6000+indexPath.row;
+    
+    
     return cell;
 }
 

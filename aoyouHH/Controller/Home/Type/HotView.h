@@ -8,7 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+//1.
+@protocol HotViewDelegate <NSObject>
+
+//@required
+-(void)didSelectImage:(NSArray *)imageArr currentIndex:(NSInteger)currentIndex;
+
+@end
+
 @interface HotView : UIView
+
+//2.
+@property(nonatomic, assign) id<HotViewDelegate> delegate;
 
 @property(nonatomic, strong) UITableView *tableView;
 /**

@@ -147,32 +147,20 @@ NSString *const JokeCellIndentifier = @"JokeCell";
 -(void)OnTapPicImg:(UITapGestureRecognizer *)sender{
 //    NSLog(@"aa==%@",[sender.view superview]);
 //    NSLog(@"bb==%@",[[sender.view superview] superview]);
-//    [_tableView indexPathForCell:[[sender.view superview] superview]];
-   
-/*    NSInteger tag = sender.view.tag;
-    JokeModel *joke = _dataSources[tag-6000];
-    
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@big/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
-    NSURL *url = [NSURL URLWithString:urlStr];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-    NSLog(@"tag:%ld",tag);
-    NSMutableArray *imgArray = [[NSMutableArray alloc] init];
-    [imgArray addObject:image];
-    AlbumViewController *albumVC = [[AlbumViewController alloc] init];
-    albumVC.imgs = imgArray;
-    albumVC.imageTag = 6000;
-    albumVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:albumVC animated:YES];
- */
+
     NSInteger tag = sender.view.tag;
     JokeModel *joke = _dataSources[tag-6000];
-    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc] init];
     NSMutableArray *imgArray = [[NSMutableArray alloc] init];
     NSString *urlStr = [NSString stringWithFormat:@"%@%@big/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
     [imgArray addObject:urlStr];
     [imgArray addObject:urlStr];
+    [imgArray addObject:urlStr];
+    
+    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc] init];
     jzAlbumVC.imgArr = imgArray;
+//    jzAlbumVC.currentIndex = 1;
     [self presentModalViewController:jzAlbumVC animated:YES];
+    
 //    [self presentViewController:<#(UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>]
 //    [self.navigationController pushViewController:jzAlbumVC animated:YES];
 }
