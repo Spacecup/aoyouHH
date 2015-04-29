@@ -10,4 +10,6 @@
 
 @interface MsgViewController : UIViewController
 
+@property(nonatomic, strong) UITableView *tableView;
+
 @end

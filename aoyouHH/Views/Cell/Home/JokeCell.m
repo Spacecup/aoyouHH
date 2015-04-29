@@ -100,6 +100,10 @@
     [self.greenBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.greenBtn setFont:[UIFont systemFontOfSize:14]];
     [self.backView addSubview:self.greenBtn];
+    //分割线
+    self.vlineView1 = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.greenBtn.frame), CGRectGetMaxY(self.lineView.frame)+5, 0.5, 20)];
+    self.vlineView1.backgroundColor = RGB(241, 241, 241);
+    [self.backView addSubview:self.vlineView1];
     //红
     self.redBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.redBtn.frame = CGRectMake(screen_width/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 25);
@@ -110,6 +114,10 @@
     [self.redBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.redBtn setFont:[UIFont systemFontOfSize:14]];
     [self.backView addSubview:self.redBtn];
+    //分割线
+    self.vlineView2 = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.redBtn.frame), CGRectGetMaxY(self.lineView.frame)+5, 0.5, 20)];
+    self.vlineView2.backgroundColor = RGB(241, 241, 241);
+    [self.backView addSubview:self.vlineView2];
     //评论
     self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.commentBtn.frame = CGRectMake(screen_width*2/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 25);
@@ -117,6 +125,10 @@
     [self.commentBtn setImage:[UIImage imageNamed:@"item_comment"] forState:UIControlStateSelected];
     [self.commentBtn setImage:[UIImage imageNamed:@"item_comment"] forState:UIControlStateDisabled];
     [self.backView addSubview:self.commentBtn];
+    //分割线
+    self.vlineView3 = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.commentBtn.frame), CGRectGetMaxY(self.lineView.frame)+5, 0.5, 20)];
+    self.vlineView3.backgroundColor = RGB(241, 241, 241);
+    [self.backView addSubview:self.vlineView3];
     //分享
     self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.shareBtn.frame = CGRectMake(screen_width*3/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 25);
@@ -187,6 +199,11 @@
     self.redBtn.frame = CGRectMake(screen_width/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 30);
     self.commentBtn.frame = CGRectMake(screen_width*2/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 30);
     self.shareBtn.frame = CGRectMake(screen_width*3/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 30);
+    //分割线
+    self.vlineView1.frame = CGRectMake(CGRectGetMaxX(self.greenBtn.frame)-1, CGRectGetMaxY(self.lineView.frame)+5, 1, 20);
+    self.vlineView2.frame = CGRectMake(CGRectGetMaxX(self.redBtn.frame)-1, CGRectGetMaxY(self.lineView.frame)+5, 1, 20);
+    self.vlineView3.frame = CGRectMake(CGRectGetMaxX(self.commentBtn.frame)-1, CGRectGetMaxY(self.lineView.frame)+5, 1, 20);
+    
     self.backView.frame = CGRectMake(0, _marginTop, screen_width, CGRectGetMaxY(self.greenBtn.frame));
     
     self.cellHeight = CGRectGetMaxY(self.backView.frame);

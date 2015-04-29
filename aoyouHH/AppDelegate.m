@@ -60,7 +60,7 @@
     UITabBarController *tabbarCtr = [[UITabBarController alloc] init];
     //4.
     [tabbarCtr setViewControllers:viewCtrs];
-//    tabbarCtr.delegate = self;
+    tabbarCtr.delegate = self;
     //5.
     self.window.rootViewController = tabbarCtr;
     
@@ -71,6 +71,11 @@
     UITabBarItem *item3 = [tabbar.items objectAtIndex:2];
     UITabBarItem *item4 = [tabbar.items objectAtIndex:3];
     UITabBarItem *item5 = [tabbar.items objectAtIndex:4];
+    item1.tag = 0;
+    item2.tag = 1;
+    item3.tag = 2;
+    item4.tag = 3;
+    item5.tag = 4;
     item1.title = @"首页";
     item2.title = @"发现";
 //    item3.title = @"首页";
@@ -121,5 +126,18 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+#pragma mark - UITabBarControllerDelegate
+-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+    NSLog(@"dddd");
+}
+//-(void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
+//    if (item.tag == 0) {
+//        NSLog(@"000");
+//    }else if (item.tag == 1){
+//        NSLog(@"111");
+//    }
+//}
 
 @end

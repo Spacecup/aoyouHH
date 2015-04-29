@@ -26,6 +26,10 @@
 @property(nonatomic, strong) UIButton *commentBtn;
 @property(nonatomic, strong) UIButton *shareBtn;
 
+@property(nonatomic, strong) UIView *vlineView1;//垂直分割线
+@property(nonatomic, strong) UIView *vlineView2;//垂直分割线
+@property(nonatomic, strong) UIView *vlineView3;//垂直分割线
+
 /**
  *  图片大小类型，默认的时normal
  */

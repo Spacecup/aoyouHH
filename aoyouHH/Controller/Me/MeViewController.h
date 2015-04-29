@@ -10,4 +10,6 @@
 
 @interface MeViewController : UIViewController
 
+@property(nonatomic, strong) UITableView *tableView;
+
 @end

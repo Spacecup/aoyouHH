@@ -9,6 +9,8 @@
 #import "NetworkSingleton.h"
 #import "JokeModel.h"
 #import "TuijianAttModel.h"
+#import "UserModel.h"
+#import "UserSingleton.h"
 
 
 @interface NetworkSingleton ()
@@ -44,6 +46,24 @@
     return manager;
 }
 
+#pragma mark 登录接口
+-(void)userLogin:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBolck{
+    AFHTTPRequestOperationManager *manager = [self baseHtppRequest];
+    NSString *url = [NSString stringWithFormat:@"%@",URL_ROOT];
+    NSString *urlStr = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [manager POST:urlStr parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject){
+//        NSLog(@"登录：%@",responseObject);
+        UserModel *user = [self getUserModel:responseObject];
+        //保存用户登录信息
+        [[UserSingleton sharedManager] setUser:user];
+        successBlock(user);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"error:%@",error.localizedFailureReason);
+        failureBolck(@"用户名或密码错误");
+        
+    }];
+}
+
 #pragma mark 推荐关注
 -(void)getTuijianAttResult:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBolck{
     AFHTTPRequestOperationManager *manager = [self baseHtppRequest];
@@ -70,7 +90,6 @@
     //编码
     NSString *urlStr = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [manager POST:urlStr parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject){
-//        NSLog(@"JSON: %@",responseObject);
         NSDictionary *resultDic = [responseObject objectForKey:@"joke"];
         
         //JokeModel
@@ -99,6 +118,20 @@
         NSLog(@"getOneJokeResule:%@",error);
         failureBlock(@"网络或者服务器错误");
     }];
+}
+
+//==================================登录=======================================
+-(id)getUserModel:(NSDictionary *)dic{
+    UserModel *result = [[UserModel alloc] init];
+    
+    result.score = [self getDicValue:dic andKey:@"score"];
+    result.level = [self getDicValue:dic andKey:@"level"];
+    result.name = [self getDicValue:dic andKey:@"name"];
+    result.avatar = [self getDicValue:dic andKey:@"avatar"];
+    result.com = [self getDicValue:dic andKey:@"com"];
+    result.mes = [self getDicValue:dic andKey:@"mes"];
+    
+    return result;
 }
 
 //==================================关注=======================================
