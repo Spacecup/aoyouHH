@@ -56,6 +56,7 @@
 		E3C3D5771AF0B5810055A0DD /* user_level_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D5751AF0B5810055A0DD /* user_level_img@2x.png */; };
 		E3C3D5781AF0B5810055A0DD /* user_score_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C3D5761AF0B5810055A0DD /* user_score_img@2x.png */; };
 		E3C3D57B1AF0B98E0055A0DD /* UserSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D57A1AF0B98E0055A0DD /* UserSingleton.m */; };
+		E3C3D5811AF209350055A0DD /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C3D5801AF209350055A0DD /* PhotoView.m */; };
 		E3D7818E1AE600E100EDC81F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D7818D1AE600E100EDC81F /* HomeViewController.m */; };
 		E3D781911AE6018200EDC81F /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781901AE6018200EDC81F /* DiscoverViewController.m */; };
 		E3D781941AE601F000EDC81F /* MsgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3D781931AE601F000EDC81F /* MsgViewController.m */; };
@@ -160,6 +161,8 @@
 		E3C3D5761AF0B5810055A0DD /* user_score_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user_score_img@2x.png"; sourceTree = "<group>"; };
 		E3C3D5791AF0B98E0055A0DD /* UserSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSingleton.h; sourceTree = "<group>"; };
 		E3C3D57A1AF0B98E0055A0DD /* UserSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSingleton.m; sourceTree = "<group>"; };
+		E3C3D57F1AF209350055A0DD /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
+		E3C3D5801AF209350055A0DD /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoView.m; sourceTree = "<group>"; };
 		E3D7818C1AE600E100EDC81F /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		E3D7818D1AE600E100EDC81F /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		E3D7818F1AE6018200EDC81F /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
@@ -374,6 +377,8 @@
 				E3C3D4A91AEE1F500055A0DD /* AlbumViewController.m */,
 				E3C3D4AB1AEE34030055A0DD /* JZAlbumViewController.h */,
 				E3C3D4AC1AEE34030055A0DD /* JZAlbumViewController.m */,
+				E3C3D57F1AF209350055A0DD /* PhotoView.h */,
+				E3C3D5801AF209350055A0DD /* PhotoView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -819,6 +824,7 @@
 				E3D7819F1AE614A300EDC81F /* AttentionView.m in Sources */,
 				E3D781AB1AE61C8E00EDC81F /* WordView.m in Sources */,
 				E3D781911AE6018200EDC81F /* DiscoverViewController.m in Sources */,
+				E3C3D5811AF209350055A0DD /* PhotoView.m in Sources */,
 				E3C3D4AA1AEE1F500055A0DD /* AlbumViewController.m in Sources */,
 				E3C3D5711AF0B0660055A0DD /* userLoginedCell.m in Sources */,
 				E3D781CA1AE883B900EDC81F /* TuijianAttModel.m in Sources */,
