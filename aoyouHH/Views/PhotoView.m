@@ -75,10 +75,42 @@
     return self;
 }
 
--(id)initWithFrame:(CGRect)frame withPhotoImage:(UIImageView *)image{
+-(id)initWithFrame:(CGRect)frame withPhotoImage:(UIImage *)image{
     self = [super initWithFrame:frame];
     if (self) {
-        //
+        //添加scrollView
+        _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+        _scrollView.delegate = self;
+        _scrollView.minimumZoomScale = 1;
+        _scrollView.maximumZoomScale = 3;
+        
+        _scrollView.showsHorizontalScrollIndicator = NO;
+        _scrollView.showsVerticalScrollIndicator = NO;
+        [self addSubview:_scrollView];
+        //添加图片
+        self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.imageView setImage:image];
+        
+        [self.imageView setUserInteractionEnabled:YES];
+        [_scrollView addSubview:self.imageView];
+        
+        //添加手势
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+        UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
+        
+        singleTap.numberOfTapsRequired = 1;
+        singleTap.numberOfTouchesRequired = 1;
+        doubleTap.numberOfTapsRequired = 2;//需要点两下
+        twoFingerTap.numberOfTouchesRequired = 2;//需要两个手指touch
+        
+        [self.imageView addGestureRecognizer:singleTap];
+        [self.imageView addGestureRecognizer:doubleTap];
+        [self.imageView addGestureRecognizer:twoFingerTap];
+        [singleTap requireGestureRecognizerToFail:doubleTap];//如果双击了，则不响应单击事件
+        
+        [_scrollView setZoomScale:1];
     }
     return self;
 }

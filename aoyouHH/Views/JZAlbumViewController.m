@@ -82,7 +82,7 @@
 
 -(void)setPicCurrentIndex:(NSInteger)currentIndex{
     _currentIndex = currentIndex;
-//    self.scrollView.contentOffset = CGPointMake(screen_width*currentIndex, 0);
+    self.scrollView.contentOffset = CGPointMake(screen_width*currentIndex, 0);
     [self loadPhote:_currentIndex];
     [self loadPhote:_currentIndex+1];
     [self loadPhote:_currentIndex-1];

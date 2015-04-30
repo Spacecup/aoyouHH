@@ -28,7 +28,7 @@
 
 -(id)initWithFrame:(CGRect)frame withPhotoUrl:(NSString *)photoUrl;
 
--(id)initWithFrame:(CGRect)frame withPhotoImage:(UIImageView *)image;
+-(id)initWithFrame:(CGRect)frame withPhotoImage:(UIImage *)image;
 
 
 
