@@ -1,7 +1,7 @@
 //
 //  HotTopicCell.h
 //  aoyouHH
-//
+//  热门话题cell
 //  Created by jinzelu on 15/4/24.
 //  Copyright (c) 2015年 jinzelu. All rights reserved.
 //

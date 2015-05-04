@@ -11,6 +11,10 @@
 #import "JokeCell.h"
 #import "CustomCell.h"
 #import "JZAlbumViewController.h"
+#import "commentCell.h"
+#import "CommentModel.h"
+#import "UIImageView+WebCache.h"
+#import "MJRefresh.h"
 
 @interface JokeDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -19,11 +23,14 @@
     NSMutableArray *_commentArray;//评论数据
     CGFloat _marginTop;
     NSInteger _contenType;
+    
+    NSInteger _currentPage;
 }
 @end
 
 NSString *const jokeDetailCellIndentifier1 = @"jokeCell";
 NSString *const jokeDetailCellIndentifier2 = @"customCell";
+NSString *const jokeDetailCellIndentifier3 = @"commentCell";
 
 @implementation JokeDetailViewController
 
@@ -71,6 +78,9 @@ NSString *const jokeDetailCellIndentifier2 = @"customCell";
     [self initData];
     [self addJokeViews];
 //    [self loadJokeData];
+    
+    //获取评论
+    [self loadFirstPage];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,7 +95,9 @@ NSString *const jokeDetailCellIndentifier2 = @"customCell";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerClass:[JokeCell class] forCellReuseIdentifier:jokeDetailCellIndentifier1];
     [self.tableView registerNib:[UINib nibWithNibName:@"CustomCell" bundle:nil] forCellReuseIdentifier:jokeDetailCellIndentifier2];
+    [self.tableView registerNib:[UINib nibWithNibName:@"commentCell" bundle:nil] forCellReuseIdentifier:jokeDetailCellIndentifier3];
     [self.view addSubview:self.tableView];
+    [self setupRefresh];
 }
 
 -(void)initData{
@@ -114,6 +126,47 @@ NSString *const jokeDetailCellIndentifier2 = @"customCell";
     }];
 }
 
+-(void)loadFirstPage{
+    _currentPage = 1;
+    [_commentArray removeAllObjects];
+    [self loadCommentData:_currentPage];
+}
+
+-(void)loadCommentData:(NSInteger)pageIndex{
+    NSString *r = @"comment_list";
+    NSString *drive_info = @"61f8612436df7ac7f0142a2de879846475f80000";
+    NSString *login_info = @"010000005EBBA600A79E395527D21A574FAFAE4E80AA21C4C50B125F75E290A38461662144239A7A";
+    NSString *order = @"time";
+    NSString *jid = [NSString stringWithFormat:@"%@",self.joke.id];
+    NSString *page = [NSString stringWithFormat:@"%ld",pageIndex];
+    NSString *offset = @"20";
+    NSDictionary *dic = @{
+                          @"r":r,
+                          @"drive_info":drive_info,
+                          @"login_info":login_info,
+                          @"order":order,
+                          @"jid":jid,
+                          @"page":page,
+                          @"offset":offset};
+    [[NetworkSingleton sharedManager] getCommentResult:dic successBlock:^(id responbody){
+        NSLog(@"获取评论成功");
+        if (((NSMutableArray *)responbody).count == 0) {
+            [self.tableView.footer noticeNoMoreData];
+        }
+        for (CommentModel *comment in responbody) {
+            [_commentArray addObject:comment];
+        }
+        [self.tableView reloadData];
+        [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
+        if (((NSMutableArray *)responbody).count == 0) {
+            [self.tableView.footer noticeNoMoreData];
+        }
+    } failureBlock:^(NSString *error){
+        NSLog(@"%@",error);
+        [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
+    }];
+}
+
 //图片点击事件
 -(void)OnTapPicImg:(UITapGestureRecognizer *)sender{
     NSMutableArray *imgArray = [[NSMutableArray alloc] init];
@@ -126,6 +179,42 @@ NSString *const jokeDetailCellIndentifier2 = @"customCell";
     [self presentViewController:jzAlbumVC animated:YES completion:nil];
     
 }
+
+#pragma mark 集成刷新控件
+-(void)setupRefresh{
+    //1.下拉刷新
+    [self.tableView addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(headerRefreshing)];
+    //2.进入程序后自动刷新
+//    [self.tableView.header beginRefreshing];
+    
+    //3.上拉加载更多(进入刷新状态就会调用self的footerRefreshing)
+    [self.tableView addLegendFooterWithRefreshingTarget:self refreshingAction:@selector(footerRefreshing)];
+    
+    //设置文字(也可不设置,默认的文字在MJRefreshConst中修改))
+    [self.tableView.header setTitle:@"下拉刷新" forState:MJRefreshHeaderStateIdle];
+    [self.tableView.header setTitle:@"松开刷新" forState:MJRefreshHeaderStatePulling];
+    [self.tableView.header setTitle:@"刷新中" forState:MJRefreshHeaderStateRefreshing];
+    
+    [self.tableView.footer setTitle:@"点击或上拉加载更多" forState:MJRefreshFooterStateIdle];
+    [self.tableView.footer setTitle:@"加载中..." forState:MJRefreshFooterStateRefreshing];
+    [self.tableView.footer setTitle:@"没有更多" forState:MJRefreshFooterStateNoMoreData];
+}
+#pragma mark 开始进入刷新状态
+-(void)headerRefreshing{
+    [self loadFirstPage];
+}
+#pragma mark 下拉刷新
+-(void)footerRefreshing{
+    _currentPage++;
+    [self loadCommentData:_currentPage];
+}
+#pragma mark 刷新tableview
+-(void)reloadTable{
+    //    [self.tableView reloadData];
+    [self.tableView.header endRefreshing];
+    [self.tableView.footer endRefreshing];
+}
+
 
 
 
@@ -163,12 +252,25 @@ NSString *const jokeDetailCellIndentifier2 = @"customCell";
         
         return cell;
     }else{
-        CustomCell *cell = (CustomCell *)[tableView dequeueReusableCellWithIdentifier:jokeDetailCellIndentifier2];
-        //赋值
-        cell.MsgLabel.text = @"快快来抢沙发";
+        if (_commentArray.count == 0) {
+            CustomCell *cell = (CustomCell *)[tableView dequeueReusableCellWithIdentifier:jokeDetailCellIndentifier2];
+            //赋值
+            cell.MsgLabel.text = @"快快来抢沙发";
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }else{
+            commentCell *cell = (commentCell *)[tableView dequeueReusableCellWithIdentifier:jokeDetailCellIndentifier3];
+            //赋值
+            CommentModel *comment = [[CommentModel alloc] init];
+            comment = _commentArray[indexPath.row];
+            cell.userNameLable.text = comment.user_name;
+            cell.commentLabel.text = [comment.content stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
+            [cell.userImg sd_setImageWithURL:[NSURL URLWithString:comment.user_pic] placeholderImage:[UIImage imageNamed:@"comment_avatar_img"]];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
+        }
         
-        
-        return cell;
     }
 }
 
@@ -203,7 +305,18 @@ NSString *const jokeDetailCellIndentifier2 = @"customCell";
             //        NSLog(@"222222height:%f",height);
             return height + _marginTop;
     }else{
-        return 100;
+        CGFloat height = 0.0;
+        height = _marginTop + 15;
+        
+        if (_commentArray.count>0) {
+            CGSize contentSize = {0,0};
+            contentSize = [((CommentModel *)_commentArray[indexPath.row]).content sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(screen_width-16, 1000) lineBreakMode:UILineBreakModeWordWrap];
+            height = height + contentSize.height + _marginTop;
+            
+            return height + _marginTop;
+        }else{
+            return 100;
+        }
     }
 }
 

@@ -89,6 +89,7 @@ NSString *const HotestCellIndentifier = @"JokeCell";
         [APPDELEGATE.hub hide:YES];
         [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
     } failureBlock:^(NSString *error){
+        [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
         [APPDELEGATE.hub hide:YES];
         NSLog(@"%@",error);
     }];

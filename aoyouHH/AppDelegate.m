@@ -11,6 +11,8 @@
 #import "DiscoverViewController.h"
 #import "MsgViewController.h"
 #import "MeViewController.h"
+#import "UserSingleton.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -129,6 +131,27 @@
 
 
 #pragma mark - UITabBarControllerDelegate
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    if ([tabBarController.viewControllers indexOfObject:viewController] != 2) {
+        return YES;
+    }else{
+        if ([[UserSingleton sharedManager] hasLogin]) {
+            return YES;
+        }else{
+            UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+            LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+            loginVC.view.backgroundColor = [UIColor purpleColor];
+            [tabController presentViewController:loginVC animated:YES completion:nil];
+            
+            
+//            LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+//            loginVC.view.backgroundColor = [UIColor purpleColor];
+////            [viewController.navigationController pushViewController:loginVC animated:YES];
+//            [viewController presentViewController:loginVC animated:YES completion:nil];
+            return NO;
+        }
+    }
+}
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     NSLog(@"dddd");
 }

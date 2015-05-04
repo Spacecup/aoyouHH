@@ -11,6 +11,7 @@
 #import "TuijianAttModel.h"
 #import "UserModel.h"
 #import "UserSingleton.h"
+#import "CommentModel.h"
 
 
 @interface NetworkSingleton ()
@@ -120,6 +121,50 @@
     }];
 }
 
+#pragma mark 获取评论
+-(void)getCommentResult:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock{
+    AFHTTPRequestOperationManager *manager = [self baseHtppRequest];
+    NSString *url = [NSString stringWithFormat:@"%@",URL_ROOT];
+    NSString *urlStr = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [manager POST:urlStr parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject){
+        NSMutableArray *commentArray = [[NSMutableArray alloc] init];
+        NSMutableArray *commentArr = [responseObject objectForKey:@"comments"];
+        NSMutableArray *resultArr = [[NSMutableArray alloc] init];
+        //这里需要特殊处理下，因为后台返回的数据结构有点变态
+        for (int i = 0; i < commentArr.count; i++) {
+            [resultArr addObject:commentArr[i][0]];
+        }
+        
+        commentArray = [self getCommentFromDicArray:resultArr];
+        successBlock(commentArray);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        failureBlock(@"网络或者服务器错误");
+    }];
+}
+
+//==================================评论=======================================
+-(NSArray *)getCommentFromDicArray:(NSArray *)array{
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    if (array) {
+        for (NSDictionary *dic in array) {
+            [result addObject:[self getCommentModel:dic]];
+        }
+    }
+    return result;
+}
+-(id)getCommentModel:(NSDictionary *)dic{
+    CommentModel *comment = [[CommentModel alloc] init];
+    comment.id = [self getDicValue:dic andKey:@"id"];
+    comment.content = [self getDicValue:dic andKey:@"content"];
+    comment.user_id = [self getDicValue:dic andKey:@"user_id"];
+    comment.user_name = [self getDicValue:dic andKey:@"user_name"];
+    comment.user_pic = [self getDicValue:dic andKey:@"user_pic"];
+    comment.time = [self getDicValue:dic andKey:@"time"];
+    comment.light = [self getDicValue:dic andKey:@"light"];
+    comment.able = [self getDicValue:dic andKey:@"able"];
+    
+    return comment;
+}
 //==================================登录=======================================
 -(id)getUserModel:(NSDictionary *)dic{
     UserModel *result = [[UserModel alloc] init];
