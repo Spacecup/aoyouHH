@@ -10,6 +10,7 @@
 #import "NetworkSingleton.h"
 #import "JokeCell.h"
 #import "CustomCell.h"
+#import "JZAlbumViewController.h"
 
 @interface JokeDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -40,6 +41,8 @@ NSString *const jokeDetailCellIndentifier2 = @"customCell";
     if (self) {
         //
         NSLog(@"JokeDetailViewController===initWithNibName");
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController setNavigationBarHidden:NO];
     }
     return self;
 }
@@ -111,6 +114,22 @@ NSString *const jokeDetailCellIndentifier2 = @"customCell";
     }];
 }
 
+//图片点击事件
+-(void)OnTapPicImg:(UITapGestureRecognizer *)sender{
+    NSMutableArray *imgArray = [[NSMutableArray alloc] init];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@big/%@", URL_IMAGE, _jokeData.pic.path, _jokeData.pic.name];
+    [imgArray addObject:urlStr];
+    
+    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc] init];
+    jzAlbumVC.imgArr = imgArray;
+    jzAlbumVC.currentIndex = 0;
+    [self presentViewController:jzAlbumVC animated:YES completion:nil];
+    
+}
+
+
+
+
 #pragma mark - UITableViewDataSource
 //组数
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -137,6 +156,10 @@ NSString *const jokeDetailCellIndentifier2 = @"customCell";
             [cell setJokeData:_jokeData];
 
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UITapGestureRecognizer *singletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnTapPicImg:)];
+        [cell.picImg addGestureRecognizer:singletap];
+        cell.picImg.userInteractionEnabled = YES;
         
         return cell;
     }else{

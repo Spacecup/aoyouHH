@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JokeModel.h"
 
 //1.
 @protocol HotViewDelegate <NSObject>
 
 //@required
--(void)didSelectImage:(NSArray *)imageArr currentIndex:(NSInteger)currentIndex;
+-(void)didSelectImage:(NSMutableArray *)imageArr currentIndex:(NSInteger)currentIndex;
+-(void)didselectRowAtIndexPath:(NSIndexPath *)indexPath jokeData:(JokeModel *)joke;
 
 @end
 

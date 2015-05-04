@@ -184,6 +184,7 @@
         cell.textLabel.text = [[_dataArr1 objectAtIndex:indexPath.row] objectForKey:@"title"];
         NSString *imgStr = [[_dataArr1 objectAtIndex:indexPath.row] objectForKey:@"pic"];
         cell.imageView.image = [UIImage imageNamed:imgStr];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
     }else if(indexPath.section == 1){
@@ -199,6 +200,7 @@
             cell.textLabel.text = tuijianModel.content;
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",tuijianModel.number];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
     }else{
@@ -212,6 +214,7 @@
             tuijianModel = _dataArr3[indexPath.row];
             [cell setData:tuijianModel];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
     }

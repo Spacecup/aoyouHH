@@ -8,7 +8,6 @@
 
 #import "HotView.h"
 #import "MJRefresh.h"
-#import "JokeModel.h"
 #import "JokeCell.h"
 #import "NetworkSingleton.h"
 
@@ -202,6 +201,14 @@ NSString *const HotestCellIndentifier = @"JokeCell";
         return 160;
     }
     
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    JokeModel *joke = [[JokeModel alloc] init];
+    joke = _dataSources[indexPath.row];
+    
+    [self.delegate didselectRowAtIndexPath:indexPath jokeData:joke];
+
 }
 
 

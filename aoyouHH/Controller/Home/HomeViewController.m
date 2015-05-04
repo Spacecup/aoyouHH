@@ -15,6 +15,7 @@
 #import "JokeViewController.h"
 #import "JZAlbumViewController.h"
 #import "NetworkSingleton.h"
+#import "JokeDetailViewController.h"
 
 @interface HomeViewController ()<HotViewDelegate>
 
@@ -65,14 +66,24 @@
     [self.view addSubview:self.scroll];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 #pragma mark - HotViewDelegate
--(void)didSelectImage:(NSArray *)imageArr currentIndex:(NSInteger)currentIndex{
+-(void)didSelectImage:(NSMutableArray *)imageArr currentIndex:(NSInteger)currentIndex{
     JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc] init];
     jzAlbumVC.imgArr = imageArr;
     jzAlbumVC.currentIndex = currentIndex;
     [self presentViewController:jzAlbumVC animated:YES completion:nil];
 }
-
+//选中一行
+-(void)didselectRowAtIndexPath:(NSIndexPath *)indexPath jokeData:(JokeModel *)joke{
+    JokeDetailViewController *jokeDetailVC = [[JokeDetailViewController alloc] init];
+    jokeDetailVC.joke = joke;
+    [self.navigationController pushViewController:jokeDetailVC animated:YES];
+    [self.navigationController setNavigationBarHidden:NO];
+}
 
 
 

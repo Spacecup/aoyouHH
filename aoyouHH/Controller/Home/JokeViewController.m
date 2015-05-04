@@ -159,10 +159,8 @@ NSString *const JokeCellIndentifier = @"JokeCell";
     JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc] init];
     jzAlbumVC.currentIndex = 2;
     jzAlbumVC.imgArr = imgArray;
-    [self presentModalViewController:jzAlbumVC animated:YES];
-    
-//    [self presentViewController:<#(UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>]
-//    [self.navigationController pushViewController:jzAlbumVC animated:YES];
+//    [self presentModalViewController:jzAlbumVC animated:YES];
+    [self presentViewController:jzAlbumVC animated:YES completion:nil];
 }
 
 
