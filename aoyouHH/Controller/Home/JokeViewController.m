@@ -222,7 +222,7 @@ NSString *const JokeCellIndentifier = @"JokeCell";
     
     JokeDetailViewController *jokeDetailVC = [[JokeDetailViewController alloc] init];
     jokeDetailVC.joke = joke;
-    
+    jokeDetailVC.title = @"详情";
 //    JokeDetailViewController *jokeDetailVC = [JokeDetailViewController shareManeger];
 //    [jokeDetailVC setData:joke];
     [self.navigationController pushViewController:jokeDetailVC animated:YES];

@@ -27,7 +27,7 @@
         _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _scrollView.delegate = self;
         _scrollView.minimumZoomScale = 1;
-        _scrollView.maximumZoomScale = 3;
+        _scrollView.maximumZoomScale = 5;
         
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
@@ -82,7 +82,7 @@
         _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _scrollView.delegate = self;
         _scrollView.minimumZoomScale = 1;
-        _scrollView.maximumZoomScale = 3;
+        _scrollView.maximumZoomScale = 5;
         
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.showsVerticalScrollIndicator = NO;
@@ -103,7 +103,7 @@
         singleTap.numberOfTapsRequired = 1;
         singleTap.numberOfTouchesRequired = 1;
         doubleTap.numberOfTapsRequired = 2;//需要点两下
-        twoFingerTap.numberOfTouchesRequired = 2;//需要两个手指touch
+        twoFingerTap.numberOfTouchesRequired = 2;//
         
         [self.imageView addGestureRecognizer:singleTap];
         [self.imageView addGestureRecognizer:doubleTap];

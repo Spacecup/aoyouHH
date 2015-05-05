@@ -81,6 +81,7 @@
 -(void)didselectRowAtIndexPath:(NSIndexPath *)indexPath jokeData:(JokeModel *)joke{
     JokeDetailViewController *jokeDetailVC = [[JokeDetailViewController alloc] init];
     jokeDetailVC.joke = joke;
+    jokeDetailVC.title = @"详情";
     [self.navigationController pushViewController:jokeDetailVC animated:YES];
     [self.navigationController setNavigationBarHidden:NO];
 }

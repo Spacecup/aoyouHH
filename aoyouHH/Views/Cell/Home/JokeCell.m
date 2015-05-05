@@ -164,7 +164,12 @@
 //        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
 //        NSLog(@"width:%f,height:%f",image.size.width,image.size.height);
     }
-    
+    if ([self.joke.topic_content isEqualToString:@""]) {
+        self.topicBtn.hidden = YES;
+    }else{
+        self.topicBtn.hidden = NO;
+    }
+    [self.topicBtn setTitle:self.joke.topic_content forState:UIControlStateNormal];
     [self.greenBtn setTitle:[NSString stringWithFormat:@"%@",self.joke.good] forState:UIControlStateNormal];
     [self.redBtn setTitle:[NSString stringWithFormat:@"%@",self.joke.bad] forState:UIControlStateNormal];
 
