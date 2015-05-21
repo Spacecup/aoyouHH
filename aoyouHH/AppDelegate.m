@@ -101,7 +101,7 @@
     
     
     [self setNav];
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];    
     [self.window makeKeyAndVisible];
     
     return YES;

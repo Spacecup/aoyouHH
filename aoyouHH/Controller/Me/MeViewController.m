@@ -11,6 +11,9 @@
 #import "userLoginedCell.h"
 #import "UserSingleton.h"
 #import "UIImageView+WebCache.h"
+#import "VedioDetailViewController.h"
+#import "HHConfig.h"
+#import "CourseViewController.h"
 
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
@@ -209,6 +212,16 @@
         alertVC.tag = 10;
         alertVC.delegate = self;
         [alertVC show];
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0) {
+            VedioDetailViewController *vedioVC = [[VedioDetailViewController alloc] init];
+            [self.navigationController pushViewController:vedioVC animated:YES];
+        }else if (indexPath.row == 1){
+            CourseViewController *courseVC = [[CourseViewController alloc] init];
+            [self.navigationController pushViewController:courseVC animated:YES];
+        }else{
+            
+        }
     }
 }
 

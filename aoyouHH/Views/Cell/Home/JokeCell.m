@@ -82,6 +82,12 @@
     self.contentLabel.font = [UIFont systemFontOfSize:15];
     self.contentLabel.lineBreakMode = UILineBreakModeTailTruncation;
     [self.backView addSubview:self.contentLabel];
+    //富文本内容
+    self.contentRCLabel = [[RCLabel alloc] initWithFrame:CGRectMake(8, CGRectGetMaxY(self.userImg.frame)+_marginTop, screen_width-8*2, 100)];
+//    self.contentRCLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+//    [self.backView addSubview:self.contentRCLabel];
+    
+    
     //图片
     self.picImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, 0, 0)];
     [self.backView addSubview:self.picImg];
@@ -156,7 +162,15 @@
     self.userNameLable.text = joke.user_name;
     self.timeLabel.text = joke.time;
     [self.userImg sd_setImageWithURL:[NSURL URLWithString:self.joke.user_pic] placeholderImage:[UIImage imageNamed:@"content_avatar_img"]];
-//    self.contentLabel.text = self.joke.content;
+    NSString *contentStr = [self.joke.content stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
+//    NSString *contentStr = self.joke.content;
+//    NSString *contentStyleStr = [NSString stringWithFormat:@"<font size=15 color='#3EAFAD'>测</font>%@",contentStr];
+//    RTLabelComponentsStructure *componentesDS = [RCLabel extractTextStyle:contentStyleStr];
+//    self.contentRCLabel.componentsAndPlainText = componentesDS;
+    
+    
+    
+//    self.contentLabel.text = [NSString stringWithFormat:@"<font size=15 color='#3EAFAD'>测试字体颜色</font>%@",contentStr];    
     self.contentLabel.text = [self.joke.content stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
     if (self.joke.pic!=nil) {
 //        NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@", URL_IMAGE, joke.pic.path,self.imgType, joke.pic.name];
@@ -180,23 +194,40 @@
 -(void)resizeHeight{
 //    self.joke.content
     CGSize contentSize = {0,0};
+//    CGSize optimalSize = [self.contentRCLabel optimumSize];
+//    CGFloat contentRCLabelHeight = 0;
     if(self.contentType == 0){//显示5行
         contentSize = [self.joke.content sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(screen_width-8*2, 100) lineBreakMode:UILineBreakModeTailTruncation];
+//        if (optimalSize.height>100) {
+//            self.contentRCLabel.frame = CGRectMake(8, CGRectGetMaxY(self.userImg.frame)+_marginTop, screen_width-8*2, 100);
+//            contentRCLabelHeight = 100;
+//        }else{
+//            self.contentRCLabel.frame = CGRectMake(8, CGRectGetMaxY(self.userImg.frame)+_marginTop, screen_width-8*2, optimalSize.height);
+//            contentRCLabelHeight = optimalSize.height;
+//        }
     }else{//全部显示
         contentSize = [self.joke.content sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(screen_width-8*2, 1000) lineBreakMode:UILineBreakModeTailTruncation];
+//        self.contentRCLabel.frame = CGRectMake(8, CGRectGetMaxY(self.userImg.frame)+_marginTop, screen_width-8*2, optimalSize.height);
+//        contentRCLabelHeight = optimalSize.height;
     }
     
-//    NSLog(@"contentSize.height:%f",contentSize.height);
     self.contentLabel.frame = CGRectMake(8, CGRectGetMaxY(self.userImg.frame)+_marginTop, screen_width-8*2, contentSize.height);
+    
+    
+    
+    
     if (self.joke.pic!=nil) {
         NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@", URL_IMAGE, self.joke.pic.path,self.imgType, self.joke.pic.name];
         NSURL *url = [NSURL URLWithString:urlStr];
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-//        NSLog(@"width:%f,height:%f",image.size.width,image.size.height);
         self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, image.size.width, image.size.height);
+//        self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentRCLabel.frame)+_marginTop, image.size.width, image.size.height);
+//        self.picImg.frame = CGRectMake(8, contentRCLabelHeight+_marginTop, image.size.width, image.size.height);
         [self.picImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"comment_empty_img"]];
     }else{
         self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, 0, 0);
+//        self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentRCLabel.frame)+_marginTop, 0, 0);
+//        self.picImg.frame = CGRectMake(8, contentRCLabelHeight+_marginTop, 0, 0);
     }
     
     self.lineView.frame = CGRectMake(0, CGRectGetMaxY(self.picImg.frame)+_marginTop-0.5, screen_width, 0.5);

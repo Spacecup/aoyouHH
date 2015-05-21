@@ -16,4 +16,13 @@
 @property(nonatomic, strong) NSMutableArray *hotTopicArr;
 
 
+//传课
+@property(nonatomic, strong) NSMutableArray *FocusListArr;
+@property(nonatomic, strong) NSMutableArray *CourseListArr;
+@property(nonatomic, strong) NSMutableArray *AlbumListArr;
+
+
+
+
+
 @end

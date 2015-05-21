@@ -12,6 +12,10 @@
 #import "UserModel.h"
 #import "UserSingleton.h"
 #import "CommentModel.h"
+#import "MJExtension.h"
+#import "FocusModel.h"
+#import "AlbumModel.h"
+#import "HHConfig.h"
 
 
 @interface NetworkSingleton ()
@@ -141,6 +145,45 @@
         failureBlock(@"网络或者服务器错误");
     }];
 }
+
+#pragma mark - 获取传课数据
+-(void)getChuanKeMain:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock{
+    AFHTTPRequestOperationManager *manager = [self baseHtppRequest];
+    NSString *url = [NSString stringWithFormat:@"%@",@"http://pop.client.chuanke.com/?mod=recommend&act=mobile&client=2&limit=20"];
+    NSString *urlStr = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [manager GET:urlStr parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject){
+//        NSLog(@"传课：%@",responseObject);
+        NSArray *focusList = [responseObject objectForKey:@"FocusList"];
+        NSArray *courseList = [responseObject objectForKey:@"CourseList"];
+        NSArray *AlbumList = [responseObject objectForKey:@"AlbumList"];
+        
+        NSMutableArray *focusListArray = [[NSMutableArray alloc] init];
+        NSMutableArray *courseArray = [[NSMutableArray alloc] init];
+        NSMutableArray *albumArray = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < focusList.count; i++) {
+            FocusModel *focus = [FocusModel objectWithKeyValues:focusList[i]];
+            [focusListArray addObject:focus];
+        }
+        [HHConfig sharedManager].FocusListArr = focusListArray;
+        for (int i = 0; i < courseList.count; i++) {
+            FocusModel *focus = [FocusModel objectWithKeyValues:courseList[i]];
+            [courseArray addObject:focus];
+        }
+        [HHConfig sharedManager].CourseListArr = courseArray;
+        for (int i = 0; i < AlbumList.count; i++) {
+            AlbumModel *album = [AlbumModel objectWithKeyValues:AlbumList[i]];
+            [albumArray addObject:album];
+        }
+        [HHConfig sharedManager].AlbumListArr = albumArray;
+        successBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"传课:error");
+    }];
+}
+
+
+
 
 //==================================评论=======================================
 -(NSArray *)getCommentFromDicArray:(NSArray *)array{

@@ -10,6 +10,7 @@
 #import "MJRefresh.h"
 #import "JokeCell.h"
 #import "NetworkSingleton.h"
+#import "RCLabel.h"
 
 @interface HotView ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -65,8 +66,8 @@ NSString *const HotestCellIndentifier = @"JokeCell";
 }
 
 -(void)getHotestData:(NSInteger)currentPage{
-    APPDELEGATE.hub = [MBProgressHUD showHUDAddedTo:APPDELEGATE.window animated:YES];
-    APPDELEGATE.hub.labelText = @"加载中...";
+//    APPDELEGATE.hub = [MBProgressHUD showHUDAddedTo:APPDELEGATE.window animated:YES];
+//    APPDELEGATE.hub.labelText = @"加载中...";
     
     NSString *r = @"joke_list";
     NSString *drive_info = @"61f8612436df7ac7f0142a2de879846475f80000";
@@ -86,11 +87,11 @@ NSString *const HotestCellIndentifier = @"JokeCell";
             [_dataSources addObject:joke];
         }
         [self.tableView reloadData];
-        [APPDELEGATE.hub hide:YES];
+//        [APPDELEGATE.hub hide:YES];
         [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
     } failureBlock:^(NSString *error){
         [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
-        [APPDELEGATE.hub hide:YES];
+//        [APPDELEGATE.hub hide:YES];
         NSLog(@"%@",error);
     }];
 }
@@ -185,6 +186,20 @@ NSString *const HotestCellIndentifier = @"JokeCell";
         JokeModel *joke = _dataSources[indexPath.row];
         CGSize contentSize = [joke.content sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(screen_width-8*2, 100) lineBreakMode:UILineBreakModeTailTruncation];
         height =height + contentSize.height;
+        
+//        NSString *contentStr = [joke.content stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
+//        NSString *contentStyleStr = [NSString stringWithFormat:@"<font size=15 color='#3EAFAD'>测试字体颜色</font>%@",contentStr];
+//        RCLabel *tempLabel = [[RCLabel alloc] initWithFrame:CGRectMake(8, 0, screen_width-18, 100)];
+//        RTLabelComponentsStructure *componentesDS = [RCLabel extractTextStyle:contentStyleStr];
+//        tempLabel.componentsAndPlainText = componentesDS;
+//        CGSize optimalSize = [tempLabel optimumSize];
+//        if (optimalSize.height>100) {
+//            height = height + 100;
+//        }else{
+//            height = height + optimalSize.height;
+//        }
+////        height = height + optimalSize.height;
+//        NSLog(@"optimalSize.height:%f",optimalSize.height);
         
         if (joke.pic!=nil) {
             //

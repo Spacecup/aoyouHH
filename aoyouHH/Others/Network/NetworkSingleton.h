@@ -42,5 +42,7 @@ typedef void(^FailureBolck)(NSString *error);
 #pragma mark 获取评论
 -(void)getCommentResult:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock;
 
+#pragma mark - 获取传课数据
+-(void)getChuanKeMain:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock;
 
 @end

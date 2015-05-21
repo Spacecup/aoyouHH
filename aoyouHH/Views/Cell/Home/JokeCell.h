@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JokeModel.h"
+#import "RCLabel.h"
 
 @interface JokeCell : UITableViewCell
 
@@ -18,6 +19,8 @@
 @property(nonatomic, strong) UILabel *timeLabel;
 @property(nonatomic, strong) UIButton *topicBtn;
 @property(nonatomic, strong) UILabel *contentLabel;
+@property(nonatomic, strong) RCLabel *contentRCLabel;//富文本
+
 @property(nonatomic, strong) UIImageView *picImg;
 
 @property(nonatomic, strong) UIView *lineView;
