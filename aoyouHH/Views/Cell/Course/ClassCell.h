@@ -11,6 +11,11 @@
 
 @interface ClassCell : UITableViewCell
 
+@property(nonatomic, strong) UIView *lineView;
+@property(nonatomic, strong) UILabel *titleLable;
+@property(nonatomic, strong) UILabel *timeLabel;
+
+
 @property(nonatomic, strong) ClassModel *classModel;
 
 

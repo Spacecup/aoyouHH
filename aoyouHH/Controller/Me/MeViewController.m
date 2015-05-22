@@ -215,6 +215,8 @@
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
             VedioDetailViewController *vedioVC = [[VedioDetailViewController alloc] init];
+            NSString *fileUrl = @"http://118.118.171.6/10e1ba8400000000-1432116853-2936408529/data12/v.chuanke.com/vedio/1/08/65/10865711ff6997a671e6622352385208.mp4";
+            vedioVC.FileUrl = fileUrl;
             [self.navigationController pushViewController:vedioVC animated:YES];
         }else if (indexPath.row == 1){
             CourseViewController *courseVC = [[CourseViewController alloc] init];

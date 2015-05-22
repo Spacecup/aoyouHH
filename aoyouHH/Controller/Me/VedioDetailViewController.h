@@ -10,4 +10,6 @@
 
 @interface VedioDetailViewController : UIViewController
 
+@property(nonatomic, strong) NSString *FileUrl;
+
 @end

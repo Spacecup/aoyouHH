@@ -42,13 +42,13 @@
 
 @property(nonatomic, strong) NSString *Individuation;
 @property(nonatomic, strong) NSString *CreateTime;
-@property(nonatomic, assign) BOOL *VideoDownload;//
+@property(nonatomic, assign) NSString *VideoDownload;//
 @property(nonatomic, strong) NSNumber *ClassNumber;//
 @property(nonatomic, strong) NSString *SchoolName;
 
-@property(nonatomic, strong) NSMutableArray *StepList;//
+@property(nonatomic, strong) NSArray *StepList;//
 @property(nonatomic, strong) NSString *TotalAppraise;
-@property(nonatomic, assign) BOOL IsCollect;//
+@property(nonatomic, assign) NSNumber *IsCollect;//
 
 
 

@@ -31,6 +31,7 @@
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self initViews];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self initPlayer];
     });
@@ -43,14 +44,17 @@
 
 -(void)initPlayer{
     //http://118.118.171.6/10e1ba8400000000-1432116853-2936408529/data12/v.chuanke.com/vedio/1/08/65/10865711ff6997a671e6622352385208.mp4
-//    NSURL *url = [NSURL URLWithString:@"http://cm12.c110.play.bokecc.com/flvs/ca/QxFOo/uvufn4jCIz-10.mp4?t=1432117677&key=9643E27CE4FAC762AFD4671754776E77"];
-    NSURL *url = [NSURL URLWithString:@"http://118.118.171.6/10e1ba8400000000-1432116853-2936408529/data12/v.chuanke.com/vedio/1/08/65/10865711ff6997a671e6622352385208.mp4"];
-//    NSURL *url1 = [NSURL URLWithString:@"http://docs.sencha.com/touch/2.4/2.4.1-apidocs/touch-build/examples/video/resources/media/BigBuck.webm"];
+//    NSURL *url = [NSURL URLWithString:@"http://118.118.171.6/10e1ba8400000000-1432116853-2936408529/data12/v.chuanke.com/vedio/1/08/65/10865711ff6997a671e6622352385208.mp4"];
+    
+    NSURL *url = [NSURL URLWithString:self.FileUrl];
     _player = [[KSVideoPlayerView alloc] initWithFrame:CGRectMake(0, 0, screen_width, 300) contentURL:url];
     _player.delegate = self;
     [self.view addSubview:_player];
     _player.tintColor = [UIColor redColor];
     [_player play];
+}
+
+-(void)initViews{
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(0, 400, 100, 40);
     [backBtn setTitle:@"back" forState:UIControlStateNormal];

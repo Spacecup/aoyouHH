@@ -183,6 +183,20 @@
         successBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
         NSLog(@"传课:error");
+        failureBlock(@"传课网络连接失败");
+    }];
+}
+
+#pragma mark - 获取课程详情
+-(void)getCourseDetailResult:(NSDictionary *)userInfo url:(NSString *)url successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock{
+    AFHTTPRequestOperationManager *manager = [self baseHtppRequest];
+    //http://pop.client.chuanke.com/?mod=course&act=info&do=getClassList&sid=1562432&courseid=116310&version=2.4.1.2&uid=5942916
+    [manager GET:url parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject){
+//        NSLog(@"课程详情：%@",responseObject);        
+        successBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+        NSLog(@"课程详情：error");
+        failureBlock(@"传课网络连接失败");        
     }];
 }
 

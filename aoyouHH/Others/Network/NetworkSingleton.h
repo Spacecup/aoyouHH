@@ -15,6 +15,7 @@ typedef void(^FailureBolck)(NSString *error);
 //接口域名
 #define URL_ROOT @"http://www.haha.mx/mobile_app_data_api.php"
 #define URL_IMAGE @"http://image.haha.mx/"
+#define URL_CHUANKE @"http://pop.client.chuanke.com/"
 //请求超时
 #define TIMEOUT 30
 
@@ -44,5 +45,8 @@ typedef void(^FailureBolck)(NSString *error);
 
 #pragma mark - 获取传课数据
 -(void)getChuanKeMain:(NSDictionary *)userInfo successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock;
+
+#pragma mark - 获取课程详情
+-(void)getCourseDetailResult:(NSDictionary *)userInfo url:(NSString *)url successBlock:(SuccessBlock)successBlock failureBlock:(FailureBolck)failureBlock;
 
 @end
