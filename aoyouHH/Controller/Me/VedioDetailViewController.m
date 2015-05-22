@@ -55,6 +55,10 @@
 }
 
 -(void)initViews{
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, 300)];
+    backView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:backView];
+    
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(0, 400, 100, 40);
     [backBtn setTitle:@"back" forState:UIControlStateNormal];

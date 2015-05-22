@@ -53,7 +53,7 @@
     [dic1 setObject:@"my_publish_joke_img" forKey:@"pic"];
     [_dataSource addObject:dic1];
     NSMutableDictionary *dic2 = [[NSMutableDictionary alloc] init];
-    [dic2 setObject:@"我发布的评论" forKey:@"title"];
+    [dic2 setObject:@"我发布的评论->穿越到高仿百度传课APP" forKey:@"title"];
     [dic2 setObject:@"my_publish_comment_img" forKey:@"pic"];
     [_dataSource addObject:dic2];
     NSMutableDictionary *dic3 = [[NSMutableDictionary alloc] init];
