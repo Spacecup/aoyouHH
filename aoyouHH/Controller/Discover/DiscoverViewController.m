@@ -194,9 +194,9 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:disCellIndentifier2];
         }
         //赋值
-        TuijianAttModel *tuijianModel = [[TuijianAttModel alloc] init];
+//        TuijianAttModel *tuijianModel = [[TuijianAttModel alloc] init];
         if (_dataArr2.count>0) {
-            tuijianModel = _dataArr2[indexPath.row];
+            TuijianAttModel *tuijianModel = _dataArr2[indexPath.row];
             cell.textLabel.text = tuijianModel.content;
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",tuijianModel.number];
         }
@@ -210,8 +210,8 @@
             cell = [[HotTopicCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:disCellIndentifier3];
         }
         if (_dataArr3.count>0) {
-            TuijianAttModel *tuijianModel = [[TuijianAttModel alloc] init];
-            tuijianModel = _dataArr3[indexPath.row];
+//            TuijianAttModel *tuijianModel = [[TuijianAttModel alloc] init];
+            TuijianAttModel *tuijianModel = _dataArr3[indexPath.row];
             [cell setData:tuijianModel];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

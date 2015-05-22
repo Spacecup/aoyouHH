@@ -166,9 +166,9 @@ NSString *const AttentionCellIndentifier2 = @"myAttentionCell";
         ReAttentionCell *cell = (ReAttentionCell *)[tableView dequeueReusableCellWithIdentifier:AttentionCellIndentifier1];
         //赋值
         
-        TuijianAttModel *tuijianModel = [[TuijianAttModel alloc] init];
+//        TuijianAttModel *tuijianModel = [[TuijianAttModel alloc] init];
         if (_tuiJianArr.count>0) {
-            tuijianModel = _tuiJianArr[indexPath.row];
+            TuijianAttModel *tuijianModel = _tuiJianArr[indexPath.row];
             
             
             cell.titleLabel.text = tuijianModel.content;

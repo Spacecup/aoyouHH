@@ -132,6 +132,7 @@ NSString *const WordCellIndentifier = @"JokeCell";
 }
 //cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"文字:cellForRowAtIndexPath");
     JokeCell *cell = (JokeCell *)[tableView dequeueReusableCellWithIdentifier:WordCellIndentifier];
     if (_dataSources.count>0) {
         //
@@ -150,6 +151,10 @@ NSString *const WordCellIndentifier = @"JokeCell";
     height=_marginTop + height + _marginTop + 30 + _marginTop;
     if (_dataSources.count>0) {
         JokeModel *joke = _dataSources[indexPath.row];
+        NSLog(@"文字：joke.height:%f",joke.height);
+        return joke.height;
+        
+        
         CGSize contentSize = [joke.content sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(screen_width-8*2, 100) lineBreakMode:UILineBreakModeTailTruncation];
         height =height + contentSize.height;
         
@@ -171,6 +176,11 @@ NSString *const WordCellIndentifier = @"JokeCell";
     
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    JokeModel *joke = [[JokeModel alloc] init];
+    JokeModel *joke = _dataSources[indexPath.row];
+    [self.delegate didSelectRowAtIndexPathWordView:indexPath jokeData:joke];
+}
 
 
 

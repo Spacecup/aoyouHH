@@ -23,6 +23,12 @@
 		E36237CF1B0DAD4200570A4C /* FocusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36237CE1B0DAD4200570A4C /* FocusModel.m */; };
 		E36237D51B0DBBAF00570A4C /* AlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36237D41B0DBBAF00570A4C /* AlbumModel.m */; };
 		E36237DA1B0DC0D200570A4C /* CourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E36237D91B0DC0D200570A4C /* CourseViewController.m */; };
+		E36237DD1B0DE4FD00570A4C /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E36237DC1B0DE4FD00570A4C /* CourseDetailViewController.m */; };
+		E36237E11B0DF28800570A4C /* ClassCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E36237E01B0DF28800570A4C /* ClassCell.m */; };
+		E36237E51B0DF67A00570A4C /* CourseDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36237E41B0DF67A00570A4C /* CourseDetailModel.m */; };
+		E36237E81B0DF80F00570A4C /* StepModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36237E71B0DF80F00570A4C /* StepModel.m */; };
+		E36237EB1B0DF85800570A4C /* ClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36237EA1B0DF85800570A4C /* ClassModel.m */; };
+		E36237EE1B0DF90A00570A4C /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E36237ED1B0DF90A00570A4C /* VideoModel.m */; };
 		E389BCEE1AE4DA1B00EA35B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E389BCED1AE4DA1B00EA35B7 /* main.m */; };
 		E389BCF11AE4DA1B00EA35B7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E389BCF01AE4DA1B00EA35B7 /* AppDelegate.m */; };
 		E389BCF91AE4DA1B00EA35B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E389BCF81AE4DA1B00EA35B7 /* Images.xcassets */; };
@@ -150,6 +156,18 @@
 		E36237D41B0DBBAF00570A4C /* AlbumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumModel.m; sourceTree = "<group>"; };
 		E36237D81B0DC0D200570A4C /* CourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseViewController.h; sourceTree = "<group>"; };
 		E36237D91B0DC0D200570A4C /* CourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseViewController.m; sourceTree = "<group>"; };
+		E36237DB1B0DE4FD00570A4C /* CourseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailViewController.h; sourceTree = "<group>"; };
+		E36237DC1B0DE4FD00570A4C /* CourseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailViewController.m; sourceTree = "<group>"; };
+		E36237DF1B0DF28800570A4C /* ClassCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassCell.h; sourceTree = "<group>"; };
+		E36237E01B0DF28800570A4C /* ClassCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassCell.m; sourceTree = "<group>"; };
+		E36237E31B0DF67A00570A4C /* CourseDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailModel.h; sourceTree = "<group>"; };
+		E36237E41B0DF67A00570A4C /* CourseDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailModel.m; sourceTree = "<group>"; };
+		E36237E61B0DF80F00570A4C /* StepModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepModel.h; sourceTree = "<group>"; };
+		E36237E71B0DF80F00570A4C /* StepModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepModel.m; sourceTree = "<group>"; };
+		E36237E91B0DF85800570A4C /* ClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassModel.h; sourceTree = "<group>"; };
+		E36237EA1B0DF85800570A4C /* ClassModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassModel.m; sourceTree = "<group>"; };
+		E36237EC1B0DF90A00570A4C /* VideoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoModel.h; sourceTree = "<group>"; };
+		E36237ED1B0DF90A00570A4C /* VideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoModel.m; sourceTree = "<group>"; };
 		E389BCE81AE4DA1B00EA35B7 /* aoyouHH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = aoyouHH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E389BCEC1AE4DA1B00EA35B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E389BCED1AE4DA1B00EA35B7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -343,6 +361,7 @@
 		E36237CC1B0DAD0600570A4C /* course */ = {
 			isa = PBXGroup;
 			children = (
+				E36237E21B0DF64800570A4C /* CourseDetail */,
 				E36237CD1B0DAD4200570A4C /* FocusModel.h */,
 				E36237CE1B0DAD4200570A4C /* FocusModel.m */,
 				E36237D31B0DBBAF00570A4C /* AlbumModel.h */,
@@ -364,8 +383,34 @@
 			children = (
 				E36237D81B0DC0D200570A4C /* CourseViewController.h */,
 				E36237D91B0DC0D200570A4C /* CourseViewController.m */,
+				E36237DB1B0DE4FD00570A4C /* CourseDetailViewController.h */,
+				E36237DC1B0DE4FD00570A4C /* CourseDetailViewController.m */,
 			);
 			path = Course;
+			sourceTree = "<group>";
+		};
+		E36237DE1B0DF0EE00570A4C /* Course */ = {
+			isa = PBXGroup;
+			children = (
+				E36237DF1B0DF28800570A4C /* ClassCell.h */,
+				E36237E01B0DF28800570A4C /* ClassCell.m */,
+			);
+			path = Course;
+			sourceTree = "<group>";
+		};
+		E36237E21B0DF64800570A4C /* CourseDetail */ = {
+			isa = PBXGroup;
+			children = (
+				E36237E31B0DF67A00570A4C /* CourseDetailModel.h */,
+				E36237E41B0DF67A00570A4C /* CourseDetailModel.m */,
+				E36237E61B0DF80F00570A4C /* StepModel.h */,
+				E36237E71B0DF80F00570A4C /* StepModel.m */,
+				E36237E91B0DF85800570A4C /* ClassModel.h */,
+				E36237EA1B0DF85800570A4C /* ClassModel.m */,
+				E36237EC1B0DF90A00570A4C /* VideoModel.h */,
+				E36237ED1B0DF90A00570A4C /* VideoModel.m */,
+			);
+			path = CourseDetail;
 			sourceTree = "<group>";
 		};
 		E389BCDF1AE4DA1B00EA35B7 = {
@@ -706,6 +751,7 @@
 		E3D781AC1AE6208100EDC81F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				E36237DE1B0DF0EE00570A4C /* Course */,
 				E3D781AE1AE6208100EDC81F /* Home */,
 				E3D781AD1AE6208100EDC81F /* Discover */,
 				E3D781AF1AE6208100EDC81F /* Me */,
@@ -995,6 +1041,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3C3D2F21AE9E39D0055A0DD /* HHConfig.m in Sources */,
+				E36237EE1B0DF90A00570A4C /* VideoModel.m in Sources */,
 				E3D781C41AE7A1EA00EDC81F /* JokeModel.m in Sources */,
 				E3C3D5621AF0898D0055A0DD /* UserModel.m in Sources */,
 				E3D781BA1AE641D700EDC81F /* ViewController.m in Sources */,
@@ -1034,15 +1081,20 @@
 				E3C3D57B1AF0B98E0055A0DD /* UserSingleton.m in Sources */,
 				E3D781D31AE8BB6300EDC81F /* CustomCell.m in Sources */,
 				E36237C91B0DA65A00570A4C /* NSObject+MJProperty.m in Sources */,
+				E36237E81B0DF80F00570A4C /* StepModel.m in Sources */,
 				E3C3D4AD1AEE34030055A0DD /* JZAlbumViewController.m in Sources */,
 				E3D781A81AE61C6800EDC81F /* FunView.m in Sources */,
 				E36237D51B0DBBAF00570A4C /* AlbumModel.m in Sources */,
+				E36237EB1B0DF85800570A4C /* ClassModel.m in Sources */,
 				E3D781A21AE61C0900EDC81F /* HotView.m in Sources */,
 				E3D781BD1AE78D9300EDC81F /* NetworkSingleton.m in Sources */,
 				E36237CA1B0DA65A00570A4C /* NSString+MJExtension.m in Sources */,
 				E3D781C71AE7A2A400EDC81F /* PicModel.m in Sources */,
 				E3D781CE1AE8B80A00EDC81F /* JokeCell.m in Sources */,
+				E36237E11B0DF28800570A4C /* ClassCell.m in Sources */,
+				E36237DD1B0DE4FD00570A4C /* CourseDetailViewController.m in Sources */,
 				E36237AC1B0C56C700570A4C /* KSVideoPlayerView.m in Sources */,
+				E36237E51B0DF67A00570A4C /* CourseDetailModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

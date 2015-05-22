@@ -17,7 +17,7 @@
 #import "NetworkSingleton.h"
 #import "JokeDetailViewController.h"
 
-@interface HomeViewController ()<HotViewDelegate>
+@interface HomeViewController ()<HotViewDelegate,NewViewDelegate,FunViewDelegate,WordViewDelegate>
 
 @end
 
@@ -45,10 +45,13 @@
     CGRect frame = CGRectMake(0, 20, screen_width, screen_height-49-20);
     UIView *v1 = [AttentionView new];
     HotView *v2 = [[HotView alloc] init];
-    UIView *v3 = [NewView new];
-    UIView *v4 = [FunView new];
-    UIView *v5 = [WordView new];
-    v2.delegate = self;
+    NewView *v3 = [NewView new];
+    FunView *v4 = [FunView new];
+    WordView *v5 = [WordView new];
+    v2.delegate = self; 
+    v3.delegate = self;
+    v4.delegate = self;
+    v5.delegate = self;
     NSArray *views = @[v1, v2,v3,v4,v5];
 //    NSArray *views = @[[AttentionView new],[HotView new],[NewView new],[FunView new],[WordView new]];
 //    NSArray *views = @[jokeVC.view,[HotView new],[NewView new],[FunView new],[WordView new]];
@@ -67,18 +70,19 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
 }
 
-#pragma mark - HotViewDelegate
--(void)didSelectImage:(NSMutableArray *)imageArr currentIndex:(NSInteger)currentIndex{
+//打开相册
+-(void)openAlbumImg:(NSMutableArray *)imageArr currentIndex:(NSInteger) currentIndex{
     JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc] init];
     jzAlbumVC.imgArr = imageArr;
     jzAlbumVC.currentIndex = currentIndex;
     [self presentViewController:jzAlbumVC animated:YES completion:nil];
 }
-//选中一行
--(void)didselectRowAtIndexPath:(NSIndexPath *)indexPath jokeData:(JokeModel *)joke{
+//打开详情页
+-(void)openJokeDetailAtIndexPath:(NSIndexPath *)indexPath jokeData:(JokeModel *)joke{
     JokeDetailViewController *jokeDetailVC = [[JokeDetailViewController alloc] init];
     jokeDetailVC.joke = joke;
     jokeDetailVC.title = @"详情";
@@ -87,6 +91,36 @@
 }
 
 
+#pragma mark - HotViewDelegate
+-(void)didSelectImage:(NSMutableArray *)imageArr currentIndex:(NSInteger)currentIndex{
+    [self openAlbumImg:imageArr currentIndex:currentIndex];
+}
+//选中一行
+-(void)didselectRowAtIndexPath:(NSIndexPath *)indexPath jokeData:(JokeModel *)joke{
+    [self openJokeDetailAtIndexPath:indexPath jokeData:joke];
+}
+
+#pragma mark - NewViewDelegate
+-(void)didSelectImageNewView:(NSMutableArray *)imageArr currentIndex:(NSInteger)currentIndex{
+    [self openAlbumImg:imageArr currentIndex:currentIndex];
+}
+
+-(void)didSelectRowAtIndexPathNewView:(NSIndexPath *)indexPath jokeData:(JokeModel *)joke{
+    [self openJokeDetailAtIndexPath:indexPath jokeData:joke];
+}
+
+#pragma mark - FunViewDelegate
+-(void)didSelectImageFunView:(NSMutableArray *)imageArr currentIndex:(NSInteger)currentIndex{
+    [self openAlbumImg:imageArr currentIndex:currentIndex];
+}
+-(void)didSelectRowAtIndexPathFunView:(NSIndexPath *)indexPath jokeData:(JokeModel *)joke{
+    [self openJokeDetailAtIndexPath:indexPath jokeData:joke];
+}
+
+#pragma mark - WordViewDelegate
+-(void)didSelectRowAtIndexPathWordView:(NSIndexPath *)indexPath jokeData:(JokeModel *)joke{
+    [self openJokeDetailAtIndexPath:indexPath jokeData:joke];
+}
 
 
 /*

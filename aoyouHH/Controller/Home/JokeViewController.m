@@ -217,8 +217,7 @@ NSString *const JokeCellIndentifier = @"JokeCell";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    JokeModel *joke = [[JokeModel alloc] init];
-    joke = _dataSources[indexPath.row];
+    JokeModel *joke = _dataSources[indexPath.row];
     
     JokeDetailViewController *jokeDetailVC = [[JokeDetailViewController alloc] init];
     jokeDetailVC.joke = joke;

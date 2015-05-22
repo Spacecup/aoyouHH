@@ -11,6 +11,7 @@
 #import "NetworkSingleton.h"
 #import "FocusModel.h"
 #import "UIImageView+WebCache.h"
+#import "CourseDetailViewController.h"
 
 @interface CourseViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -103,8 +104,8 @@
         [cell.contentView addSubview:subTitleLabel];
     }
     //赋值
-    FocusModel *focus = [[FocusModel alloc] init];
-    focus = [_dataSourceArr objectAtIndex:indexPath.row];
+//    FocusModel *focus = [[FocusModel alloc] init];
+    FocusModel *focus = [_dataSourceArr objectAtIndex:indexPath.row];
     UIImageView *courseImg = (UIImageView *)[cell.contentView viewWithTag:20];
     UILabel *titleLabel = (UILabel *)[cell.contentView viewWithTag:21];
     UILabel *subTitleLabel = (UILabel *)[cell.contentView viewWithTag:22];
@@ -118,6 +119,14 @@
 }
 
 #pragma mark - UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    FocusModel *focus = [[FocusModel alloc] init];
+    FocusModel *focus = [_dataSourceArr objectAtIndex:indexPath.row];
+    CourseDetailViewController *CourseDetVC = [[CourseDetailViewController alloc] init];
+    CourseDetVC.focus = focus;
+    
+    [self.navigationController pushViewController:CourseDetVC animated:YES];
+}
 
 
 

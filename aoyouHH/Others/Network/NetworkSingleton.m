@@ -19,6 +19,9 @@
 
 
 @interface NetworkSingleton ()
+{
+    
+}
 
 @end
 
@@ -78,8 +81,8 @@
     //请求
     [manager POST:urlStr parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject){
         
-        NSArray *tuijianAtt = [[NSArray alloc] init];
-        tuijianAtt = [self getTuijianAttFromDicArray:responseObject];
+//        NSArray *tuijianAtt = [[NSArray alloc] init];
+        NSArray *tuijianAtt = [self getTuijianAttFromDicArray:responseObject];
         
         successBlock(tuijianAtt);
         
@@ -98,8 +101,8 @@
         NSDictionary *resultDic = [responseObject objectForKey:@"joke"];
         
         //JokeModel
-        NSArray *jokeArr = [[NSArray alloc] init];
-        jokeArr = [self getJokeFromDicArray:[responseObject objectForKey:@"joke"]];
+//        NSArray *jokeArr = [[NSArray alloc] init];
+        NSArray *jokeArr = [self getJokeFromDicArray:[responseObject objectForKey:@"joke"]];
         
         successBlock(jokeArr);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
@@ -116,6 +119,7 @@
     NSString *urlStr = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [manager POST:urlStr parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject){
         
+//        NSMutableArray *jokeArr = nil;
         NSMutableArray *jokeArr = [[NSMutableArray alloc] init];
         jokeArr = [self getJokeFromDicArray:responseObject];
         successBlock(jokeArr);
@@ -131,7 +135,7 @@
     NSString *url = [NSString stringWithFormat:@"%@",URL_ROOT];
     NSString *urlStr = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [manager POST:urlStr parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject){
-        NSMutableArray *commentArray = [[NSMutableArray alloc] init];
+        NSMutableArray *commentArray = nil;
         NSMutableArray *commentArr = [responseObject objectForKey:@"comments"];
         NSMutableArray *resultArr = [[NSMutableArray alloc] init];
         //这里需要特殊处理下，因为后台返回的数据结构有点变态
@@ -282,6 +286,30 @@
     
     joke.user_name = [self getDicValue:dic andKey:@"user_name"];
     joke.user_pic = [self getDicValue:dic andKey:@"user_pic"];
+    CGFloat _marginTop = 5;
+    CGFloat height = 0;
+    //名字，用户头像
+    height = _marginTop + height + _marginTop + 30 +_marginTop;
+    //文本
+    CGSize contentSize = [joke.content sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(screen_width-8*2, 100) lineBreakMode:UILineBreakModeTailTruncation];
+    height =height + contentSize.height;
+    
+    CGSize MaxcontentSize = [joke.content sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(screen_width-8*2, 1000) lineBreakMode:UILineBreakModeTailTruncation];
+    
+    //大图
+    if (joke.pic!=nil) {
+        NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@", URL_IMAGE, joke.pic.path, @"normal", joke.pic.name];
+        NSURL *url = [NSURL URLWithString:urlStr];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+        height = height + _marginTop + image.size.height;
+    }else{
+        height = height +_marginTop;
+    }
+    
+    height = height +_marginTop+30 + _marginTop;
+    
+    joke.height = height;
+    joke.MaxHeight = height+MaxcontentSize.height-contentSize.height;
     
     return joke;
 }

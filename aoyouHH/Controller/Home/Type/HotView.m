@@ -66,8 +66,8 @@ NSString *const HotestCellIndentifier = @"JokeCell";
 }
 
 -(void)getHotestData:(NSInteger)currentPage{
-//    APPDELEGATE.hub = [MBProgressHUD showHUDAddedTo:APPDELEGATE.window animated:YES];
-//    APPDELEGATE.hub.labelText = @"加载中...";
+    APPDELEGATE.hub = [MBProgressHUD showHUDAddedTo:APPDELEGATE.window animated:YES];
+    APPDELEGATE.hub.labelText = @"加载中...";
     
     NSString *r = @"joke_list";
     NSString *drive_info = @"61f8612436df7ac7f0142a2de879846475f80000";
@@ -87,11 +87,11 @@ NSString *const HotestCellIndentifier = @"JokeCell";
             [_dataSources addObject:joke];
         }
         [self.tableView reloadData];
-//        [APPDELEGATE.hub hide:YES];
+        [APPDELEGATE.hub hide:YES];
         [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
     } failureBlock:^(NSString *error){
         [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
-//        [APPDELEGATE.hub hide:YES];
+        [APPDELEGATE.hub hide:YES];
         NSLog(@"%@",error);
     }];
 }
@@ -134,7 +134,16 @@ NSString *const HotestCellIndentifier = @"JokeCell";
 
 #pragma mark 开始进入刷新状态
 -(void)headerRefreshing{
-    [self loadFirstPageData];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        //加载数据
+//        [self loadFirstPageData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //更新UI
+            [self loadFirstPageData];
+        });
+    });
+    
 }
 #pragma mark 下拉刷新
 -(void)footerRefreshing{
@@ -184,6 +193,9 @@ NSString *const HotestCellIndentifier = @"JokeCell";
     height=_marginTop + height + _marginTop + 30 + _marginTop;
     if (_dataSources.count>0) {
         JokeModel *joke = _dataSources[indexPath.row];
+        NSLog(@"joke.height:%f",joke.height);
+        return joke.height;
+        
         CGSize contentSize = [joke.content sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(screen_width-8*2, 100) lineBreakMode:UILineBreakModeTailTruncation];
         height =height + contentSize.height;
         
@@ -220,8 +232,8 @@ NSString *const HotestCellIndentifier = @"JokeCell";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    JokeModel *joke = [[JokeModel alloc] init];
-    joke = _dataSources[indexPath.row];
+//    JokeModel *joke = [[JokeModel alloc] init];
+    JokeModel *joke = _dataSources[indexPath.row];
     
     [self.delegate didselectRowAtIndexPath:indexPath jokeData:joke];
 

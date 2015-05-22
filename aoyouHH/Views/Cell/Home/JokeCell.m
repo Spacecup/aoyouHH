@@ -53,6 +53,7 @@
     self.userImg.layer.cornerRadius = 5;
     self.userImg.layer.masksToBounds = YES;
     [self.backView addSubview:self.userImg];
+    
     //用户名
     self.userNameLable = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userImg.frame)+5, _marginTop, 150, 15)];
     self.userNameLable.font = [UIFont systemFontOfSize:12];
@@ -92,13 +93,14 @@
     self.picImg = [[UIImageView alloc] initWithFrame:CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, 0, 0)];
     [self.backView addSubview:self.picImg];
     
+    CGFloat picImgMaxY = CGRectGetMaxY(self.picImg.frame);
     //横线
-    self.lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.picImg.frame)+_marginTop-0.5, screen_width, 0.5)];
+    self.lineView = [[UIView alloc] initWithFrame:CGRectMake(0, picImgMaxY+_marginTop-0.5, screen_width, 0.5)];
     self.lineView.backgroundColor = RGB(241, 241, 241);
     [self.backView addSubview:self.lineView];
     //绿
     self.greenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.greenBtn.frame = CGRectMake(0, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 25);
+    self.greenBtn.frame = CGRectMake(0, picImgMaxY+_marginTop, screen_width/4, 25);
     [self.greenBtn setImage:[UIImage imageNamed:@"item_green_normal"] forState:UIControlStateNormal];
     [self.greenBtn setImage:[UIImage imageNamed:@"item_green_pressed"] forState:UIControlStateSelected];
     [self.greenBtn setImage:[UIImage imageNamed:@"item_green_disable"] forState:UIControlStateDisabled];
@@ -112,7 +114,7 @@
     [self.backView addSubview:self.vlineView1];
     //红
     self.redBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.redBtn.frame = CGRectMake(screen_width/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 25);
+    self.redBtn.frame = CGRectMake(screen_width/4, picImgMaxY+_marginTop, screen_width/4, 25);
     [self.redBtn setImage:[UIImage imageNamed:@"item_red_normal"] forState:UIControlStateNormal];
     [self.redBtn setImage:[UIImage imageNamed:@"item_red_pressed"] forState:UIControlStateSelected];
     [self.redBtn setImage:[UIImage imageNamed:@"item_red_disable"] forState:UIControlStateDisabled];
@@ -126,7 +128,7 @@
     [self.backView addSubview:self.vlineView2];
     //评论
     self.commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.commentBtn.frame = CGRectMake(screen_width*2/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 25);
+    self.commentBtn.frame = CGRectMake(screen_width*2/4, picImgMaxY+_marginTop, screen_width/4, 25);
     [self.commentBtn setImage:[UIImage imageNamed:@"item_comment"] forState:UIControlStateNormal];
     [self.commentBtn setImage:[UIImage imageNamed:@"item_comment"] forState:UIControlStateSelected];
     [self.commentBtn setImage:[UIImage imageNamed:@"item_comment"] forState:UIControlStateDisabled];
@@ -137,7 +139,7 @@
     [self.backView addSubview:self.vlineView3];
     //分享
     self.shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.shareBtn.frame = CGRectMake(screen_width*3/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 25);
+    self.shareBtn.frame = CGRectMake(screen_width*3/4, picImgMaxY+_marginTop, screen_width/4, 25);
     [self.shareBtn setImage:[UIImage imageNamed:@"share_btn_img"] forState:UIControlStateNormal];
     [self.shareBtn setImage:[UIImage imageNamed:@"share_btn_img"] forState:UIControlStateSelected];
     [self.shareBtn setImage:[UIImage imageNamed:@"share_btn_img"] forState:UIControlStateDisabled];
@@ -229,12 +231,12 @@
 //        self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentRCLabel.frame)+_marginTop, 0, 0);
 //        self.picImg.frame = CGRectMake(8, contentRCLabelHeight+_marginTop, 0, 0);
     }
-    
-    self.lineView.frame = CGRectMake(0, CGRectGetMaxY(self.picImg.frame)+_marginTop-0.5, screen_width, 0.5);
-    self.greenBtn.frame = CGRectMake(0, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 30);
-    self.redBtn.frame = CGRectMake(screen_width/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 30);
-    self.commentBtn.frame = CGRectMake(screen_width*2/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 30);
-    self.shareBtn.frame = CGRectMake(screen_width*3/4, CGRectGetMaxY(self.picImg.frame)+_marginTop, screen_width/4, 30);
+    CGFloat picImgMaxY = CGRectGetMaxY(self.picImg.frame);
+    self.lineView.frame = CGRectMake(0, picImgMaxY+_marginTop-0.5, screen_width, 0.5);
+    self.greenBtn.frame = CGRectMake(0, picImgMaxY+_marginTop, screen_width/4, 30);
+    self.redBtn.frame = CGRectMake(screen_width/4, picImgMaxY+_marginTop, screen_width/4, 30);
+    self.commentBtn.frame = CGRectMake(screen_width*2/4,picImgMaxY+_marginTop, screen_width/4, 30);
+    self.shareBtn.frame = CGRectMake(screen_width*3/4, picImgMaxY+_marginTop, screen_width/4, 30);
     //分割线
     self.vlineView1.frame = CGRectMake(CGRectGetMaxX(self.greenBtn.frame)-1, CGRectGetMaxY(self.lineView.frame)+5, 1, 20);
     self.vlineView2.frame = CGRectMake(CGRectGetMaxX(self.redBtn.frame)-1, CGRectGetMaxY(self.lineView.frame)+5, 1, 20);

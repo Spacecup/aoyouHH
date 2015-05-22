@@ -28,6 +28,11 @@
 @property(nonatomic, strong) NSString *user_pic;
 
 
+@property(nonatomic, assign) CGFloat height;
+@property(nonatomic, assign) CGFloat MaxHeight;
+
+
+
 
 
 

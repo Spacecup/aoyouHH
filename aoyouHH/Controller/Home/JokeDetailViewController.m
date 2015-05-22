@@ -80,7 +80,17 @@ NSString *const jokeDetailCellIndentifier3 = @"commentCell";
 //    [self loadJokeData];
     
     //获取评论
-    [self loadFirstPage];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        //加载数据
+        [self loadFirstPage];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+    });
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -239,11 +249,13 @@ NSString *const jokeDetailCellIndentifier3 = @"commentCell";
 //cell
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
+        NSLog(@"详情cell");
         JokeCell *cell = (JokeCell *)[tableView dequeueReusableCellWithIdentifier:jokeDetailCellIndentifier1];
         if (_jokeData!=nil) {
-            cell.contentType = _contenType;
-            [cell setJokeData:_jokeData];
-
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.contentType = _contenType;
+                [cell setJokeData:_jokeData];
+            });
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UITapGestureRecognizer *singletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnTapPicImg:)];
@@ -262,8 +274,8 @@ NSString *const jokeDetailCellIndentifier3 = @"commentCell";
         }else{
             commentCell *cell = (commentCell *)[tableView dequeueReusableCellWithIdentifier:jokeDetailCellIndentifier3];
             //赋值
-            CommentModel *comment = [[CommentModel alloc] init];
-            comment = _commentArray[indexPath.row];
+//            CommentModel *comment = [[CommentModel alloc] init];
+            CommentModel *comment = _commentArray[indexPath.row];
             cell.userNameLable.text = comment.user_name;
             cell.commentLabel.text = [comment.content stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
             [cell.userImg sd_setImageWithURL:[NSURL URLWithString:comment.user_pic] placeholderImage:[UIImage imageNamed:@"comment_avatar_img"]];
@@ -282,6 +294,9 @@ NSString *const jokeDetailCellIndentifier3 = @"commentCell";
         height=_marginTop + height + _marginTop + 30 + _marginTop;
 //        if (_jokeData!=nil) {
             JokeModel *joke = _jokeData;
+        
+        return joke.MaxHeight;
+        
         CGSize contentSize = {0,0};
         
         if (_contenType == 0) {

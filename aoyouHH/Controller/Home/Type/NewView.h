@@ -7,9 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JokeModel.h"
+
+//1.
+@protocol NewViewDelegate <NSObject>
+
+//@required
+-(void)didSelectImageNewView:(NSMutableArray *)imageArr currentIndex:(NSInteger)currentIndex;
+-(void)didSelectRowAtIndexPathNewView:(NSIndexPath *)indexPath jokeData:(JokeModel *)joke;
+
+@end
 
 @interface NewView : UIView
 
+@property(nonatomic, assign) id<NewViewDelegate> delegate;
 @property(nonatomic, strong) UITableView *tableView;
 
 @end

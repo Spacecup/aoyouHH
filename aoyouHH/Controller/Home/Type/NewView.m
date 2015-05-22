@@ -105,6 +105,15 @@ NSString *const NewCellIndentifier = @"JokeCell";
     [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
 }
 
+-(void)OnTapPicImg:(UITapGestureRecognizer *)sender{
+    NSInteger tag = sender.view.tag;
+    JokeModel *joke = _dataSources[tag-6000];
+    NSMutableArray *imgArray = [[NSMutableArray alloc] init];
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@big/%@", URL_IMAGE, joke.pic.path, joke.pic.name];
+    [imgArray addObject:urlStr];
+    [self.delegate didSelectImageNewView:imgArray currentIndex:0];
+}
+
 
 #pragma mark 开始进入刷新状态
 -(void)headerRefreshing{
@@ -141,6 +150,12 @@ NSString *const NewCellIndentifier = @"JokeCell";
 
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnTapPicImg:)];
+    [cell.picImg addGestureRecognizer:tap];
+    cell.picImg.userInteractionEnabled = YES;//不能少了这句
+    cell.picImg.tag = 6000+indexPath.row;
+    
     return cell;
 }
 
@@ -151,6 +166,9 @@ NSString *const NewCellIndentifier = @"JokeCell";
     height=_marginTop + height + _marginTop + 30 + _marginTop;
     if (_dataSources.count>0) {
         JokeModel *joke = _dataSources[indexPath.row];
+        NSLog(@"最新：joke.height:%f",joke.height);
+        return joke.height;
+        
         CGSize contentSize = [joke.content sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(screen_width-8*2, 100) lineBreakMode:UILineBreakModeTailTruncation];
         height =height + contentSize.height;
         
@@ -170,6 +188,12 @@ NSString *const NewCellIndentifier = @"JokeCell";
         return 160;
     }
     
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    JokeModel *joke = [[JokeModel alloc] init];
+    JokeModel *joke = _dataSources[indexPath.row];
+    [self.delegate didSelectRowAtIndexPathNewView:indexPath jokeData:joke];
 }
 
 
