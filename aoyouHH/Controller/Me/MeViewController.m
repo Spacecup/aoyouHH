@@ -215,7 +215,13 @@
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
             VedioDetailViewController *vedioVC = [[VedioDetailViewController alloc] init];
-            NSString *fileUrl = @"http://118.118.171.6/10e1ba8400000000-1432116853-2936408529/data12/v.chuanke.com/vedio/1/08/65/10865711ff6997a671e6622352385208.mp4";
+            //http://mv.hotmusique.com/mv_1_5/af/0d/af692e5eef6ced08571ba4195e84b00d.mp4?k=debbc3daaa5cb03b&t=1432822473
+            ///Users/jinzelu/Music/11.mp3
+//            NSString *fileUrl = @"http://118.118.171.6/10e1ba8400000000-1432116853-2936408529/data12/v.chuanke.com/vedio/1/08/65/10865711ff6997a671e6622352385208.mp4";
+            NSString *fileUrl = @"http://mv.hotmusique.com/mv_1_5/af/0d/af692e5eef6ced08571ba4195e84b00d.mp4?k=debbc3daaa5cb03b&t=1432822473";            
+//            NSString *fileUrl = [[NSBundle mainBundle] pathForResource:@"xihuanni" ofType:@"mp4"];
+            NSLog(@"fileUrl:%@",fileUrl);
+//            NSString *fileUrl = @"/Users/jinzelu/Music/11.mp3";
             vedioVC.FileUrl = fileUrl;
             [self.navigationController pushViewController:vedioVC animated:YES];
         }else if (indexPath.row == 1){

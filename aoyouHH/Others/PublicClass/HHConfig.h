@@ -17,12 +17,8 @@
 
 
 //传课
-@property(nonatomic, strong) NSMutableArray *FocusListArr;
-@property(nonatomic, strong) NSMutableArray *CourseListArr;
-@property(nonatomic, strong) NSMutableArray *AlbumListArr;
-
-
-
-
+@property(nonatomic, strong) NSMutableArray *FocusListArr;//轮播 数据
+@property(nonatomic, strong) NSMutableArray *CourseListArr;//tableview数据
+@property(nonatomic, strong) NSMutableArray *AlbumListArr;//图片墙 数据
 
 @end
