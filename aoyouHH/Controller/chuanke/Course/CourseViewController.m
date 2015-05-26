@@ -14,7 +14,7 @@
 #import "CourseDetailViewController.h"
 #import "ImageScrollCell.h"
 
-@interface CourseViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface CourseViewController ()<UITableViewDataSource,UITableViewDelegate,ImageScrollViewDelegate>
 {
     NSMutableArray *_dataSourceArr;
     NSMutableArray *_FocusListArr;
@@ -104,7 +104,8 @@
         }
         if (_imageArray.count>0) {
             [cell setImageArray:_imageArray];
-        }        
+        }
+        cell.imageScrollView.delegate = self;
         return cell;
         
     }else{
@@ -161,7 +162,15 @@
     }
 }
 
-
+#pragma mark - ImageScrollViewDelegate
+-(void)didSelectImageAtIndex:(NSInteger)index{
+    NSLog(@"index:%ld",index);
+    FocusModel *focus = [_FocusListArr objectAtIndex:index];
+    CourseDetailViewController *CourseDetVC = [[CourseDetailViewController alloc] init];
+    CourseDetVC.focus = focus;
+    
+    [self.navigationController pushViewController:CourseDetVC animated:YES];
+}
 
 /*
 #pragma mark - Navigation

@@ -31,7 +31,10 @@
         for(int i = 0 ; i < 4; i++){
             UIImageView *imageView = [[UIImageView alloc] init];
             imageView.frame = CGRectMake(i*screen_width, 0, screen_width, frame.size.height);
-            imageView.tag = i+10;            
+            imageView.tag = i+10;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OnTapImage:)];
+            [imageView addGestureRecognizer:tap];
+            imageView.userInteractionEnabled = YES;
             [self.scrollView addSubview:imageView];
         }
         [self addSubview:self.scrollView];
@@ -42,7 +45,7 @@
         self.pageControl.numberOfPages = 4;
         [self addSubview:self.pageControl];
         
-//        [self addTimer];
+        [self addTimer];
     }
     return self;
 }
@@ -75,8 +78,14 @@
     }
 }
 
+-(void)OnTapImage:(UITapGestureRecognizer *)sender{
+    UIImageView *imageView = (UIImageView *)sender.view;
+    int tag = imageView.tag-10;
+    [self.delegate didSelectImageAtIndex:tag];
+}
+
 -(void)addTimer{
-    _timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(netxPage) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(netxPage) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 }
 
@@ -99,20 +108,18 @@
 #pragma mark - UIScrollViewDelegate
 //滑动时
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"滚动中");
     CGFloat scrollViewW = scrollView.frame.size.width;
     CGFloat x = scrollView.contentOffset.x;
     int page = (x + scrollViewW/2)/scrollViewW;
-    NSLog(@"x=%f",x);
     self.pageControl.currentPage = page;
 }
 //开始拖动时
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-//    [self removeTimer];
+    [self removeTimer];
 }
 //结束拖动
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-//    [self addTimer];
+    [self addTimer];
 }
 
 
