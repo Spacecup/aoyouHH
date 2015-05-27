@@ -16,5 +16,8 @@
 @property (nonatomic, strong) NSNumber *height;
 @property (nonatomic, strong) NSNumber *animated;
 
+@property(nonatomic, assign) CGFloat imageWidth;
+@property(nonatomic, assign) CGFloat imageHeight;
+
 
 @end

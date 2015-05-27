@@ -220,9 +220,11 @@
     
     if (self.joke.pic!=nil) {
         NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@", URL_IMAGE, self.joke.pic.path,self.imgType, self.joke.pic.name];
+        NSLog(@"图片宽高：%d,%d",[self.joke.pic.width intValue],[self.joke.pic.height intValue]);
         NSURL *url = [NSURL URLWithString:urlStr];
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-        self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, image.size.width, image.size.height);
+//        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+        self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, self.joke.pic.imageWidth, self.joke.pic.imageHeight);
+//        self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentLabel.frame)+_marginTop, image.size.width, image.size.height);
 //        self.picImg.frame = CGRectMake(8, CGRectGetMaxY(self.contentRCLabel.frame)+_marginTop, image.size.width, image.size.height);
 //        self.picImg.frame = CGRectMake(8, contentRCLabelHeight+_marginTop, image.size.width, image.size.height);
         [self.picImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"comment_empty_img"]];

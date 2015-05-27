@@ -339,6 +339,12 @@
     pic.height = [self getDicValue:dic andKey:@"height"];
     pic.animated = [self getDicValue:dic andKey:@"animated"];
     
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@", URL_IMAGE, pic.path,@"normal", pic.name];
+    NSURL *url = [NSURL URLWithString:urlStr];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+    pic.imageWidth = image.size.width;
+    pic.imageHeight = image.size.height;
+    
     return pic;
 }
 //获取字典里的值
