@@ -99,10 +99,11 @@ NSString *const NewCellIndentifier = @"JokeCell";
             [_dataSources addObject:joke];
         }
         [self.tableView reloadData];
+        [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
     } failureBlock:^(NSString *error){
         NSLog(error);
+        [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
     }];
-    [self performSelectorOnMainThread:@selector(reloadTable) withObject:nil waitUntilDone:YES];
 }
 
 -(void)OnTapPicImg:(UITapGestureRecognizer *)sender{
