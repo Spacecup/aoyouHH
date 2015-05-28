@@ -42,6 +42,7 @@
 
     [self initScrollView];
     [self addLabels];
+    [self addSavePicBtn];
     [self setPicCurrentIndex:self.currentIndex];
 }
 
@@ -78,6 +79,52 @@
     self.sliderLabel.textColor = [UIColor whiteColor];
     self.sliderLabel.text = [NSString stringWithFormat:@"%ld/%lu",self.currentIndex+1,(unsigned long)self.imgArr.count];
     [self.view addSubview:self.sliderLabel];
+}
+
+-(void)addSavePicBtn{
+    UIButton *saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    saveBtn.frame = CGRectMake(screen_width-100, screen_height-64-49, 40, 30);
+    [saveBtn setTitle:@"保存" forState:UIControlStateNormal];
+    saveBtn.font = [UIFont systemFontOfSize:14];
+    [saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [saveBtn setTitleColor:RGB(56, 184, 80) forState:UIControlStateHighlighted];
+    saveBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
+    saveBtn.layer.borderWidth = 1;
+    [saveBtn addTarget:self action:@selector(OnSaveBtn) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:saveBtn];
+}
+
+-(void)OnSaveBtn{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        if ([self.imgArr[_currentIndex] isKindOfClass:[NSString class]]) {
+            //传来的是url
+            NSString *photoUrl = self.imgArr[_currentIndex];
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            BOOL isCached = [manager cachedImageExistsForURL:[NSURL URLWithString:photoUrl]];
+            if (isCached) {
+                //
+                NSLog(@"图片已缓存");
+                UIImage *image = [[SDImageCache sharedImageCache] imageFromMemoryCacheForKey:photoUrl];
+                if (image) {
+                    NSLog(@"找到缓存图片并保存成功");
+                    UIImageWriteToSavedPhotosAlbum(image, self, nil, nil);
+                }else{
+                    NSLog(@"没找到");
+                }
+            }else{
+                NSLog(@"没缓存");
+                NSURL *url = [NSURL URLWithString:self.imgArr[_currentIndex]];
+                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+                UIImageWriteToSavedPhotosAlbum(image, self, nil, nil);
+            }
+        }else if([self.imgArr[_currentIndex] isKindOfClass:[UIImage class]]){
+            //传的是UIImage
+            UIImageWriteToSavedPhotosAlbum(self.imgArr[_currentIndex], self, nil, nil);
+        }else{
+            
+        }
+    });    
 }
 
 -(void)setPicCurrentIndex:(NSInteger)currentIndex{
