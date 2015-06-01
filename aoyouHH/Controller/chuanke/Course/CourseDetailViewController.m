@@ -50,6 +50,7 @@ NSString *const CourseDetCellIndentifier2 = @"classCell";//节
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screen_width, screen_height) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView registerClass:[ClassCell class] forCellReuseIdentifier:CourseDetCellIndentifier2];
     
@@ -120,6 +121,13 @@ NSString *const CourseDetCellIndentifier2 = @"classCell";//节
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CourseDetCellIndentifier1];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CourseDetCellIndentifier1];
+            UIView *topLineView = [[UIView alloc] initWithFrame:CGRectMake(5, 0, screen_width-5, 0.5)];
+            topLineView.backgroundColor = RGB(200, 199, 204);
+            [cell.contentView addSubview:topLineView];
+            
+            UIView *bottomLineView = [[UIView alloc] initWithFrame:CGRectMake(5, 39.5, screen_width-5, 0.5)];
+            bottomLineView.backgroundColor = RGB(200, 199, 204);
+            [cell.contentView addSubview:bottomLineView];
         }
         //赋值
         cell.textLabel.text = ((StepModel *)[_dataSourceArr objectAtIndex:indexPath.row]).StepName;
@@ -144,6 +152,7 @@ NSString *const CourseDetCellIndentifier2 = @"classCell";//节
         VedioDetailViewController *videoVC = [[VedioDetailViewController alloc] init];
         ClassModel *classM = (ClassModel *)[_dataSourceArr objectAtIndex:indexPath.row];
         videoVC.FileUrl =[VideoModel objectWithKeyValues:classM.VideoUrl[0]].FileURL;
+        NSLog(@"fileUrl:%@",videoVC.FileUrl);
         
         [self.navigationController pushViewController:videoVC animated:YES];
     }

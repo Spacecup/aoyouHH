@@ -16,6 +16,9 @@
     BOOL viewIsShowing;
     
     UIDeviceOrientation currentOrientation;
+    
+    UIView *loadView;
+    UIActivityIndicatorView *activityIndicatorView;
 }
 
 -(id)initWithFrame:(CGRect)frame playerItem:(AVPlayerItem*)playerItem
@@ -51,7 +54,9 @@
         self.playerItem = playerItem;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerFinishedPlaying) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
         
+        [self initLoadView];
         [self initializePlayer:frame];
+        [self initPlayer];
     }
     return self;
 }
@@ -96,6 +101,26 @@
     self.zoomButton.keepLeftOffsetTo(self.playBackTotalTime).equal = KeepRequired(5);
     self.zoomButton.keepRightInset.equal = KeepRequired(5);
     [self.zoomButton keepVerticallyCentered];*/
+}
+
+-(void)initPlayer{
+    if (self.playerItem) {
+        [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+    }
+}
+
+-(void)initLoadView{
+    loadView = [[UIView alloc] initWithFrame:playerLayer.frame];
+    loadView.backgroundColor = [UIColor clearColor];
+    //loadImageView
+    
+    activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [activityIndicatorView setCenter:loadView.center];
+    [activityIndicatorView setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+    [activityIndicatorView startAnimating];
+    [loadView addSubview:activityIndicatorView];
+    
+    [self addSubview:loadView];
 }
 
 -(void)initializePlayer:(CGRect)frame
@@ -373,15 +398,48 @@
     [self.playPauseButton setSelected:NO];
 }
 
+-(void)stop{
+    if (viewIsShowing) {
+        [self showHud:viewIsShowing];
+    }
+    loadView.hidden = NO;
+    [self.moviePlayer pause];
+    [self.moviePlayer seekToTime:kCMTimeZero];
+//    [self.progressBar]
+    [self.playPauseButton setSelected:NO];
+    self.isPlaying = NO;
+}
+
 -(void)dealloc
 {
+    [self removeObserverFromPlayerItem];
     [self.moviePlayer removeTimeObserver:playbackObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
 }
 
 
+#pragma mark - 观察视频播放各个监听触发
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"status"]) {
+        AVPlayerStatus status = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+        switch (status) {
+            case AVPlayerStatusFailed:
+                NSLog(@"播放失败");
+                break;
+            case AVPlayerStatusReadyToPlay:
+                [loadView setHidden:YES];
+                break;
+            default:
+                NSLog(@"default:");
+                break;
+        }
+    }
+}
 
+-(void)removeObserverFromPlayerItem{
+    [self.playerItem removeObserver:self forKeyPath:@"status"];
+}
 
 
 

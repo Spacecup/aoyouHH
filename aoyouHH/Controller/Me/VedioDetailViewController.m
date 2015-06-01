@@ -8,10 +8,12 @@
 
 #import "VedioDetailViewController.h"
 #import "KSVideoPlayerView.h"
+#import "JZVideoPlayerView.h"
 
-@interface VedioDetailViewController ()<playerViewDelegate>
+@interface VedioDetailViewController ()<playerViewDelegate,JZPlayerViewDelegate>
 {
     KSVideoPlayerView *_player;
+    JZVideoPlayerView *_jzPlayer;
 }
 
 @end
@@ -31,9 +33,9 @@
     // Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self initViews];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self initPlayer];
+//        [self initPlayer];
+        [self initJZPlayer];
     });
 }
 
@@ -54,22 +56,12 @@
     [_player play];
 }
 
--(void)initViews{
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screen_width, 300)];
-    backView.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:backView];
-    
-    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    backBtn.frame = CGRectMake(0, 400, 100, 40);
-    [backBtn setTitle:@"back" forState:UIControlStateNormal];
-    [backBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [backBtn addTarget:self action:@selector(OnBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:backBtn];
-}
-
--(void)OnBackBtn:(UIButton *)sender{
-    [self.navigationController popViewControllerAnimated:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+-(void)initJZPlayer{
+    NSURL *url = [NSURL URLWithString:self.FileUrl];
+    _jzPlayer = [[JZVideoPlayerView alloc] initWithFrame:CGRectMake(0, 0, screen_width, 300) contentURL:url];
+    _jzPlayer.delegate = self;
+    [self.view addSubview:_jzPlayer];
+    [_jzPlayer play];
 }
 
 
@@ -117,6 +109,11 @@
     }
 }
 
+#pragma mark - JZPlayerViewDelegate
+-(void)JZOnBackBtn{
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 
 /*
 #pragma mark - Navigation

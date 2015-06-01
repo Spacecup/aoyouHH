@@ -15,6 +15,8 @@
 #import "HHConfig.h"
 #import "CourseViewController.h"
 
+#import <MediaPlayer/MPMediaQuery.h>
+
 @interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
     NSMutableArray *_dataSource;
@@ -94,6 +96,22 @@
     [[UserSingleton sharedManager] setUser:nil];
     [self.tableView reloadData];
 }
+
+
+- (void) QueryAllMusic
+{
+    MPMediaQuery *everything = [[MPMediaQuery alloc] init];
+    NSLog(@"Logging items from a generic query...");
+    NSArray *itemsFromGenericQuery = [everything items];
+    NSLog(@"count = %lu", (unsigned long)itemsFromGenericQuery.count);
+    for (MPMediaItem *song in itemsFromGenericQuery)
+    {
+        NSString *songTitle = [song valueForProperty: MPMediaItemPropertyTitle];
+        NSString *songArtist = [song valueForProperty:MPMediaItemPropertyArtist];
+        NSLog (@"Title:%@, Aritist:%@", songTitle, songArtist);
+    }
+}
+
 
 
 #pragma mark - UITableViewDataSource
@@ -228,7 +246,7 @@
             CourseViewController *courseVC = [[CourseViewController alloc] init];
             [self.navigationController pushViewController:courseVC animated:YES];
         }else{
-            
+            [self QueryAllMusic];
         }
     }
 }
@@ -244,6 +262,9 @@
         }
     }
 }
+
+
+
 
 /*
 #pragma mark - Navigation

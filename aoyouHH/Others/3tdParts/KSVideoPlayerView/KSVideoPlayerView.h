@@ -46,6 +46,7 @@
 -(id)initWithFrame:(CGRect)frame playerItem:(AVPlayerItem*)playerItem;
 -(void)play;
 -(void)pause;
+-(void)stop;
 -(void) setupConstraints;
 
 @end

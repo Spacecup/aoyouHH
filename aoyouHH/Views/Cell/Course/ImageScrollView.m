@@ -122,6 +122,9 @@
     [self addTimer];
 }
 
+-(void)dealloc{
+    [self removeTimer];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
