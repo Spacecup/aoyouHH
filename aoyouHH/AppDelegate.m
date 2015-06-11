@@ -129,6 +129,14 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    if ([[url scheme] isEqualToString:@"openchuankekkiphone"]) {
+        [application setApplicationIconBadgeNumber:10];
+        return YES;
+    }
+    return NO;
+}
+
 
 #pragma mark - UITabBarControllerDelegate
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{

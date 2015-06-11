@@ -16,10 +16,12 @@
 #import "CourseViewController.h"
 
 #import <MediaPlayer/MPMediaQuery.h>
+#import <iAd/iAd.h>
 
-@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
+@interface MeViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,ADBannerViewDelegate>
 {
     NSMutableArray *_dataSource;
+    ADBannerView *_adView;//广告视图
 }
 @end
 
@@ -33,11 +35,21 @@
     [self initData];
     [self addMyTableView];
 //    [self addLoginBtn];
+    [self addMyiAD];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)addMyiAD{
+    _adView = [[ADBannerView alloc] initWithFrame:CGRectZero];
+    //指定大小
+    _adView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+    _adView.delegate = self;
+    _adView.frame = CGRectOffset(_adView.frame, 0, screen_height-_adView.frame.size.height-50);
+    [self.view addSubview:_adView];
 }
 
 -(void)addMyTableView{
@@ -233,20 +245,30 @@
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
             VedioDetailViewController *vedioVC = [[VedioDetailViewController alloc] init];
-            //http://mv.hotmusique.com/mv_1_5/af/0d/af692e5eef6ced08571ba4195e84b00d.mp4?k=debbc3daaa5cb03b&t=1432822473
-            ///Users/jinzelu/Music/11.mp3
-//            NSString *fileUrl = @"http://118.118.171.6/10e1ba8400000000-1432116853-2936408529/data12/v.chuanke.com/vedio/1/08/65/10865711ff6997a671e6622352385208.mp4";
-            NSString *fileUrl = @"http://mv.hotmusique.com/mv_1_5/af/0d/af692e5eef6ced08571ba4195e84b00d.mp4?k=debbc3daaa5cb03b&t=1432822473";            
-//            NSString *fileUrl = [[NSBundle mainBundle] pathForResource:@"xihuanni" ofType:@"mp4"];
+            NSString *fileUrl = @"http://v.chuanke.com/vedio/1/08/65/10865711ff6997a671e6622352385208.mp4";
             NSLog(@"fileUrl:%@",fileUrl);
-//            NSString *fileUrl = @"/Users/jinzelu/Music/11.mp3";
             vedioVC.FileUrl = fileUrl;
             [self.navigationController pushViewController:vedioVC animated:YES];
         }else if (indexPath.row == 1){
             CourseViewController *courseVC = [[CourseViewController alloc] init];
             [self.navigationController pushViewController:courseVC animated:YES];
         }else{
-            [self QueryAllMusic];
+//            [self QueryAllMusic];
+            NSURL *url = [NSURL URLWithString:@"openchuankekkiphone:"];
+            BOOL isInstalled = [[UIApplication sharedApplication] openURL:url];
+            if (isInstalled) {
+
+            }else{
+                //土豆    https://appsto.re/cn/c8oMx.i
+                //找教练  https://appsto.re/cn/kRb26.i
+                //百度传课 https://appsto.re/cn/78XAL.i
+//                NSURL *url1 = [NSURL URLWithString:@"https://appsto.re/cn/c8oMx.i"];
+//                NSURL *url1 = [NSURL URLWithString:@"https://appsto.re/cn/kRb26.i"];
+                NSURL *url1 = [NSURL URLWithString:@"https://appsto.re/cn/78XAL.i"];
+                [[UIApplication sharedApplication] openURL:url1];
+                NSLog(@"没安装");
+            }
+            
         }
     }
 }
@@ -263,7 +285,25 @@
     }
 }
 
-
+#pragma mark - ADBannerViewDelegate
+//广告读取失败
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error{
+    NSLog(@"didFailToReceiveAdWithError");
+//    _adView.frame = CGRectOffset(_adView.frame, 0, screen_height);
+}
+//成功读取广告
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner{
+    NSLog(@"bannerViewDidLoadAd");
+//    _adView.frame = CGRectOffset(_adView.frame, 0, screen_height-_adView.frame.size.height-50);
+}
+//用户点击广告，返回bool指定广告是否打开
+-(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave{
+    NSLog(@"bannerViewActionShouldBegin");
+    return YES;
+}
+-(void)bannerViewActionDidFinish:(ADBannerView *)banner{
+    NSLog(@"bannerViewActionDidFinish");
+}
 
 
 /*

@@ -52,7 +52,7 @@
     self.timeLabel.textColor = [UIColor lightGrayColor];
     [self.contentView addSubview:self.timeLabel];
     
-    UIView *HLineView = [[UIView alloc] initWithFrame:CGRectMake(30, 50, screen_width-30, 0.5)];
+    UIView *HLineView = [[UIView alloc] initWithFrame:CGRectMake(30, 49.5, screen_width-30, 0.5)];
     HLineView.backgroundColor = RGB(200, 199, 204);
     [self.contentView addSubview:HLineView];
 }

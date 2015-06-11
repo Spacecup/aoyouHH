@@ -16,6 +16,8 @@
     UIActivityIndicatorView *activityIndicatorView;
     NSTimer *timer;
     BOOL viewIsShowing;
+    
+    CGPoint gestureStartPoint;
 }
 
 @end
@@ -50,6 +52,11 @@
     [self removeObserverToPlayerItem:self.playerItem];
     [self.player removeTimeObserver:playbackObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    [self.playerLayer setFrame:frame];
 }
 
 -(void)setIsFullScreen:(BOOL)isFullScreen{
@@ -131,7 +138,7 @@
     [self.playerHUDBottomView addSubview:self.zoomBtn];
     //缓冲进度条
     self.loadProgressView = [[UIProgressView alloc] init];
-    self.loadProgressView.frame = CGRectMake(32, 17, screen_width-60, 14);
+    self.loadProgressView.frame = CGRectMake(32, 17, frameWidth-60, 14);
     self.loadProgressView.progressViewStyle = UIProgressViewStyleBar;
     self.loadProgressView.progressTintColor = RGB(181, 181, 181);
     self.loadProgressView.backgroundColor = [UIColor greenColor];
@@ -139,12 +146,12 @@
     [self.playerHUDBottomView addSubview:self.loadProgressView];
     //播放进度条
     self.progressBar = [[UISlider alloc] init];
-    self.progressBar.frame = CGRectMake(30, 11, screen_width-60, 14);
+    self.progressBar.frame = CGRectMake(30, 11, frameWidth-60, 14);
     [self.progressBar addTarget:self action:@selector(progressBarChanged:) forControlEvents:UIControlEventValueChanged];
     [self.progressBar addTarget:self action:@selector(progressBarChangeEnded:) forControlEvents:UIControlEventTouchUpInside];
     [self.progressBar setMinimumTrackTintColor:RGB(242, 96, 0)];
     [self.progressBar setMaximumTrackTintColor:[UIColor clearColor]]; //设置成透明
-//    [self.progressBar trackRectForBounds:CGRectMake(0, 0, screen_width-60, 5)];
+//    [self.progressBar trackRectForBounds:CGRectMake(0, 0, frameWidth-60, 5)];
     [self.progressBar setThumbTintColor:[UIColor clearColor]];
     //滑块图片
     UIImage *thumbImage = [UIImage imageNamed:@"account_cache_isplay"];
@@ -201,11 +208,57 @@
     }
 }
 
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
+    if (UIDeviceOrientationIsLandscape(deviceOrientation)) {
+        NSLog(@"横屏");
+        [self initLandscape];
+    }else{
+        NSLog(@"竖屏");
+        [self initPortraint];
+    }
+}
+
+-(void)initLandscape{
+    NSLog(@"====%f",self.playerLayer.frame.size.width);
+    float frameWidth = self.frame.size.width;
+    float frameHeight = self.frame.size.height;
+    NSLog(@"横屏:width=%f   height=%f",frameWidth,frameHeight);
+    self.playerHUDBottomView.frame = CGRectMake(0, frameHeight-44, frameWidth, 44);
+    self.zoomBtn.frame = CGRectMake(frameWidth-27, 10, 20, 20);
+    self.progressBar.frame = CGRectMake(30, 11, frameWidth-60, 14);
+    self.loadProgressView.frame = CGRectMake(32, 17, frameWidth-60, 14);
+}
+
+-(void)initPortraint{
+    float frameWidth = self.frame.size.width;
+    float frameHeight = self.frame.size.height;
+    NSLog(@"竖屏:width=%f   height=%f",frameWidth,frameHeight);
+    self.playerHUDBottomView.frame = CGRectMake(0, frameHeight-44, frameWidth, 44);
+    self.zoomBtn.frame = CGRectMake(frameWidth-27, 10, 20, 20);
+    self.progressBar.frame = CGRectMake(30, 11, frameWidth-60, 14);
+    self.loadProgressView.frame = CGRectMake(32, 17, frameWidth-60, 14);
+}
+
+//监听touch事件
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    gestureStartPoint = [touch locationInView:self];
+}
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     CGPoint point = [(UITouch *)[touches anyObject] locationInView:self];
     if (CGRectContainsPoint(self.playerLayer.frame, point)) {
         [self showHud:viewIsShowing];
     }
+}
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    CGPoint currentPosition = [touch locationInView:self];
+    CGPoint previous = [touch previousLocationInView:self];
+    CGFloat deltaX = (gestureStartPoint.x - currentPosition.x);
+    CGFloat deltaY = (gestureStartPoint.y - currentPosition.y);
+//    NSLog(@"deltaX=%f   ,deltaY=%f",deltaX,deltaY);
 }
 
 -(void)OnPlayBtn:(UIButton *)sender{
@@ -224,10 +277,16 @@
     }else{
         [self.zoomBtn setSelected:NO];
     }
+    [self.delegate playerViewZoomButtonClicked:self];
 }
 
 -(void)OnBackBtn:(UIButton *)sender{
-    [self.delegate JZOnBackBtn];
+    if (self.isFullScreen) {
+        self.isFullScreen = !self.isFullScreen;
+        [self.delegate playerViewZoomButtonClicked:self];
+    }else{
+        [self.delegate JZOnBackBtn];
+    }
 }
 
 -(void)progressBarChanged:(UISlider *)sender{
@@ -357,14 +416,6 @@
     
     return [NSString stringWithFormat:@"%@:%@:%@", hoursString,minsString, secsString];
 }
-
-
-
-
-
-
-
-
 
 
 /*

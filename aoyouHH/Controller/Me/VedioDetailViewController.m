@@ -76,9 +76,9 @@
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
     [UIView animateWithDuration:0 animations:^{
         if (UIDeviceOrientationIsLandscape(toInterfaceOrientation)) {
-            _player.frame = CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width);
+            _jzPlayer.frame = CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width);
         }else{
-            _player.frame = CGRectMake(0, 0, self.view.frame.size.height, 300);
+            _jzPlayer.frame = CGRectMake(0, 0, self.view.frame.size.height, 300);
         }
     } completion:^(BOOL finished){
         
@@ -86,7 +86,7 @@
 }
 
 
--(void)playerViewZoomButtonClicked:(KSVideoPlayerView *)view{
+-(void)playerViewZoomButtonClicked:(JZVideoPlayerView *)view{
     //强制横屏
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
         SEL selector = NSSelectorFromString(@"setOrientation:");
@@ -95,14 +95,14 @@
             NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
             [invocation setSelector:selector];
             [invocation setTarget:[UIDevice currentDevice]];
-            int val = UIInterfaceOrientationPortrait;
+            int val = UIInterfaceOrientationPortrait;//
             [invocation setArgument:&val atIndex:2];
             [invocation invoke];
         }else{
             NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
             [invocation setSelector:selector];
             [invocation setTarget:[UIDevice currentDevice]];
-            int val = UIInterfaceOrientationLandscapeRight;
+            int val = UIInterfaceOrientationLandscapeRight;//
             [invocation setArgument:&val atIndex:2];
             [invocation invoke];
         }
